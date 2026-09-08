@@ -2,1486 +2,1462 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShieldX Cybersecurity Platform</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ShieldX | Cybersecurity Operations Center</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#050d18;color:#eef6ff;min-height:100vh}
+button,input{font:inherit}
 
-body{
-    background:#07111f;
-    color:#fff;
-    min-height:100vh;
+:root{
+ --bg:#050d18;
+ --panel:#0a1726;
+ --panel2:#0d1e30;
+ --border:#19334b;
+ --text:#eef6ff;
+ --muted:#7890a5;
+ --blue:#2997e6;
+ --green:#32c77b;
+ --yellow:#e4aa3d;
+ --red:#ef5368;
 }
 
 /* LOGIN */
 #loginPage{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:
-        radial-gradient(circle at top,#102b48 0,#07111f 45%,#040a12 100%);
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ background:radial-gradient(circle at 50% 0,#123253,#050d18 55%);
 }
 
 .login-box{
-    width:100%;
-    max-width:420px;
-    background:#0d1b2c;
-    border:1px solid #1e3855;
-    border-radius:18px;
-    padding:35px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
+ width:100%;
+ max-width:420px;
+ padding:35px;
+ background:#091827;
+ border:1px solid #23445f;
+ border-radius:18px;
+ box-shadow:0 30px 80px #0008;
 }
 
-.logo{
-    text-align:center;
-    margin-bottom:30px;
-}
-
+.logo{text-align:center;margin-bottom:28px}
 .logo-icon{
-    width:65px;
-    height:65px;
-    margin:auto;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#12385b;
-    border:1px solid #2374b8;
-    border-radius:18px;
-    font-size:30px;
+ width:70px;height:70px;margin:auto;
+ display:flex;align-items:center;justify-content:center;
+ border-radius:18px;background:#103452;
+ border:1px solid #267cb8;font-size:34px
 }
+.logo h1{font-size:30px;margin-top:15px}
+.logo h1 span{color:var(--blue)}
+.logo p{color:var(--muted);margin-top:6px}
 
-.logo h1{
-    margin-top:15px;
-    font-size:28px;
+.field{margin-bottom:17px}
+.field label{display:block;color:#a9bdd0;font-size:13px;margin-bottom:7px}
+.field input{
+ width:100%;padding:14px;
+ background:#050e19;color:white;
+ border:1px solid #25445d;border-radius:9px;outline:none
 }
-
-.logo p{
-    color:#8da4bb;
-    margin-top:6px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:8px;
-    color:#b9c9d9;
-    font-size:14px;
-}
-
-.form-group input{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:1px solid #29445e;
-    background:#071321;
-    color:white;
-    outline:none;
-    font-size:15px;
-}
-
-.form-group input:focus{
-    border-color:#2d8bd8;
-}
+.field input:focus{border-color:var(--blue)}
 
 .login-btn{
-    width:100%;
-    padding:14px;
-    border:0;
-    border-radius:10px;
-    background:#1675c4;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+ width:100%;padding:14px;border:0;border-radius:9px;
+ background:#1476c5;color:white;font-weight:bold;cursor:pointer
+}
+.login-btn:hover{background:#198be4}
+
+.login-error{
+ display:none;margin-top:14px;padding:11px;
+ color:#ff9eaa;background:#351821;border:1px solid #71303d;
+ border-radius:8px;text-align:center;font-size:13px
 }
 
-.login-btn:hover{
-    background:#1d8de7;
+.demo{
+ margin-top:20px;padding:13px;
+ background:#07121f;border:1px solid #1b344a;
+ border-radius:9px;color:#8096aa;font-size:12px;line-height:1.7
 }
 
-.error{
-    display:none;
-    margin-top:15px;
-    padding:12px;
-    background:#3b1820;
-    border:1px solid #7d2c3a;
-    color:#ff9da9;
-    border-radius:8px;
-    text-align:center;
-    font-size:14px;
-}
-
-.demo-info{
-    margin-top:22px;
-    padding:13px;
-    background:#091625;
-    border:1px solid #1d334b;
-    border-radius:10px;
-    color:#8fa7bd;
-    font-size:13px;
-    line-height:1.7;
-}
-
-.demo-info strong{
-    color:#fff;
-}
-
-/* DASHBOARD */
-#dashboardPage{
-    display:none;
-}
-
-.app{
-    display:flex;
-    min-height:100vh;
-}
+/* APP */
+#app{display:none}
+.layout{display:flex;min-height:100vh}
 
 /* SIDEBAR */
 .sidebar{
-    width:250px;
-    background:#091522;
-    border-right:1px solid #1c3044;
-    padding:22px 15px;
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    overflow-y:auto;
+ width:255px;position:fixed;left:0;top:0;bottom:0;
+ background:#07121f;border-right:1px solid var(--border);
+ padding:18px 14px;z-index:100;overflow:auto
 }
-
 .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:8px 10px 25px;
-    border-bottom:1px solid #1b3044;
+ display:flex;align-items:center;gap:11px;
+ padding:7px 10px 22px;border-bottom:1px solid var(--border)
 }
-
 .brand-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:#12385b;
-    border:1px solid #246da8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:20px;
+ width:40px;height:40px;border-radius:11px;
+ display:flex;align-items:center;justify-content:center;
+ background:#103653;border:1px solid #267db9
 }
-
-.brand h2{
-    font-size:20px;
-}
-
-.brand span{
-    color:#4ca5e8;
-}
-
-.menu{
-    margin-top:22px;
-}
+.brand h2{font-size:19px}
+.brand h2 span{color:var(--blue)}
 
 .menu-title{
-    color:#60768b;
-    font-size:11px;
-    text-transform:uppercase;
-    padding:0 12px 10px;
+ color:#536c81;font-size:10px;
+ text-transform:uppercase;padding:20px 11px 7px
 }
-
-.menu a{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    color:#91a5b8;
-    padding:12px;
-    margin:4px 0;
-    border-radius:9px;
-    font-size:14px;
+.nav{
+ width:100%;display:flex;align-items:center;gap:11px;
+ padding:11px;border:0;background:none;color:#8196aa;
+ border-radius:8px;cursor:pointer;text-align:left;margin:2px 0
 }
-
-.menu a:hover,
-.menu a.active{
-    background:#102a43;
-    color:white;
+.nav:hover,.nav.active{background:#102b43;color:white}
+.nav-icon{width:20px;text-align:center}
+.nav-badge{
+ margin-left:auto;background:#263d51;
+ padding:3px 7px;border-radius:10px;font-size:10px
 }
+.nav-badge.red{background:#642532;color:#ff9baa}
 
-.menu-icon{
-    width:20px;
-    text-align:center;
+.logout{
+ width:100%;margin-top:20px;padding:11px;
+ border-radius:8px;border:1px solid #492a32;
+ background:#20141a;color:#ef8b99;cursor:pointer
 }
 
 /* MAIN */
-.main{
-    margin-left:250px;
-    width:calc(100% - 250px);
-}
-
-/* TOPBAR */
+.main{margin-left:255px;width:calc(100% - 255px)}
 .topbar{
-    height:72px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 28px;
-    background:#091522;
-    border-bottom:1px solid #1c3044;
+ height:70px;background:#07121f;border-bottom:1px solid var(--border);
+ display:flex;align-items:center;justify-content:space-between;padding:0 25px
 }
-
-.search{
-    width:330px;
-}
-
+.search{width:340px}
 .search input{
-    width:100%;
-    padding:11px 15px;
-    background:#071321;
-    border:1px solid #243d55;
-    border-radius:9px;
-    color:white;
-    outline:none;
+ width:100%;padding:10px 14px;
+ background:#050e19;border:1px solid #203c54;
+ border-radius:8px;color:white;outline:none
 }
-
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:20px;
+.top-right{display:flex;align-items:center;gap:20px}
+.notification{position:relative;font-size:19px;cursor:pointer}
+.notification b{
+ position:absolute;right:-8px;top:-8px;
+ background:var(--red);width:16px;height:16px;border-radius:50%;
+ display:flex;align-items:center;justify-content:center;font-size:9px
 }
-
-.notification{
-    position:relative;
-    font-size:20px;
-}
-
-.badge{
-    position:absolute;
-    top:-8px;
-    right:-8px;
-    background:#e4475d;
-    font-size:10px;
-    width:17px;
-    height:17px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.admin{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
+.admin{display:flex;gap:9px;align-items:center}
 .avatar{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:#195786;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
+ width:35px;height:35px;border-radius:50%;
+ background:#195b88;display:flex;align-items:center;justify-content:center;
+ font-size:12px;font-weight:bold
 }
-
-.admin-text small{
-    color:#71869a;
-    display:block;
-}
+.admin small{display:block;color:#627b90;font-size:10px}
+.mobile-btn{display:none;font-size:23px;cursor:pointer}
 
 /* CONTENT */
-.content{
-    padding:28px;
+.content{padding:25px}
+.page-head{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:22px
+}
+.page-head h1{font-size:26px}
+.page-head p{color:var(--muted);font-size:13px;margin-top:6px}
+.live{
+ display:flex;align-items:center;gap:7px;
+ color:#70d99d;font-size:12px
+}
+.live-dot{
+ width:8px;height:8px;border-radius:50%;background:var(--green);
+ box-shadow:0 0 10px #32c77b
 }
 
-.page-title{
-    margin-bottom:25px;
-}
+/* PAGES */
+.page{display:none}
+.page.active{display:block}
 
-.page-title h1{
-    font-size:27px;
-    margin-bottom:7px;
-}
-
-.page-title p{
-    color:#71869a;
-}
-
-/* KPI */
+/* CARDS */
 .kpis{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
+ display:grid;grid-template-columns:repeat(4,1fr);gap:16px
 }
-
 .card{
-    background:#0c1b2b;
-    border:1px solid #1c344b;
-    border-radius:13px;
-    padding:20px;
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:12px;padding:18px
 }
-
-.kpi-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.kpi-title{
-    color:#8399ad;
-    font-size:13px;
-}
-
+.kpi-top{display:flex;justify-content:space-between}
+.kpi-title{color:#7890a5;font-size:12px}
 .kpi-icon{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    background:#102c46;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+ width:36px;height:36px;border-radius:9px;
+ background:#102b43;display:flex;align-items:center;justify-content:center
 }
-
-.kpi-number{
-    font-size:29px;
-    font-weight:bold;
-    margin-top:15px;
-}
-
-.kpi-bottom{
-    margin-top:8px;
-    color:#64c58a;
-    font-size:12px;
-}
+.kpi-num{font-size:28px;font-weight:bold;margin-top:14px}
+.up{color:#55d08c;font-size:11px;margin-top:6px}
+.warn{color:#e9b04f;font-size:11px;margin-top:6px}
+.down{color:#ef6c7e;font-size:11px;margin-top:6px}
 
 /* GRID */
 .grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:18px;
-    margin-top:18px;
+ display:grid;grid-template-columns:2fr 1fr;
+ gap:16px;margin-top:16px
 }
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+.grid.equal{grid-template-columns:1fr 1fr}
+.card-head{
+ display:flex;justify-content:space-between;align-items:center;margin-bottom:17px
 }
+.card-head h3{font-size:15px}
+.card-head span{color:#637d92;font-size:11px}
 
-.card-header h3{
-    font-size:16px;
+/* SCORE */
+.score{
+ display:flex;align-items:center;justify-content:center;
+ padding:18px
 }
-
-.card-header span{
-    color:#6f879d;
-    font-size:12px;
+.circle{
+ width:145px;height:145px;border-radius:50%;
+ border:12px solid #17344d;
+ border-top-color:var(--green);
+ border-right-color:var(--green);
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center
 }
+.circle strong{font-size:37px}
+.circle span{font-size:11px;color:#7c93a7}
 
-/* CHART */
+/* BARS */
 .chart{
-    height:220px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-around;
-    gap:10px;
-    padding-top:20px;
+ height:220px;display:flex;align-items:flex-end;
+ gap:12px;padding:10px
 }
+.chart-col{
+ flex:1;height:100%;display:flex;align-items:flex-end
+}
+.chart-bar{
+ width:100%;border-radius:5px 5px 0 0;
+ background:#237fbd;min-height:8px
+}
+.chart-bar:hover{background:#37a7ed}
 
-.bar-box{
-    flex:1;
-    height:100%;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{
+ text-align:left;padding:13px 10px;
+ border-bottom:1px solid #172c3e;font-size:12px
 }
-
-.bar{
-    width:65%;
-    max-width:35px;
-    border-radius:5px 5px 0 0;
-    background:#2183c9;
+th{color:#668096;font-size:10px;text-transform:uppercase}
+td{color:#c2d0dc}
+.status{
+ display:inline-block;padding:5px 8px;border-radius:6px;
+ font-size:10px
 }
-
-.bar:hover{
-    background:#39a5ef;
-}
-
-/* SECURITY SCORE */
-.score-wrap{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px 0 25px;
-}
-
-.score-circle{
-    width:170px;
-    height:170px;
-    border-radius:50%;
-    border:13px solid #1a3a55;
-    border-top-color:#38b879;
-    border-right-color:#38b879;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
-
-.score-circle strong{
-    font-size:40px;
-}
-
-.score-circle span{
-    color:#7e95a9;
-    font-size:12px;
-}
-
-/* INCIDENTS */
-.incident{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:13px 0;
-    border-bottom:1px solid #1a2d40;
-}
-
-.incident:last-child{
-    border-bottom:0;
-}
-
-.incident-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.status-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#e64b61;
-}
-
-.status-dot.warning{
-    background:#e0a63a;
-}
-
-.status-dot.safe{
-    background:#42c47f;
-}
-
-.incident-title{
-    font-size:13px;
-}
-
-.incident-time{
-    color:#62798e;
-    font-size:11px;
-    margin-top:4px;
-}
-
-.severity{
-    padding:5px 8px;
-    border-radius:6px;
-    font-size:10px;
-    background:#451b25;
-    color:#ff9baa;
-}
-
-.severity.medium{
-    background:#40351b;
-    color:#e9bd63;
-}
-
-.severity.low{
-    background:#153c2b;
-    color:#68d59a;
-}
+.status.critical{background:#491c27;color:#ff9ba8}
+.status.high{background:#49351b;color:#edbd63}
+.status.medium{background:#24371c;color:#a8d67b}
+.status.safe{background:#153d2b;color:#67d69a}
+.status.info{background:#14344e;color:#73bdf1}
 
 /* PROGRESS */
-.progress-item{
-    margin-bottom:20px;
+.progress-row{margin-bottom:17px}
+.progress-label{
+ display:flex;justify-content:space-between;
+ margin-bottom:7px;font-size:11px
 }
-
-.progress-head{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:8px;
-    font-size:12px;
-}
-
-.progress-head span{
-    color:#8aa0b3;
-}
-
+.progress-label span{color:#7f95a9}
 .progress{
-    height:8px;
-    background:#16283a;
-    border-radius:10px;
-    overflow:hidden;
+ height:7px;background:#162b3e;border-radius:10px;overflow:hidden
 }
+.fill{height:100%;background:var(--blue);border-radius:10px}
+.fill.green{background:var(--green)}
+.fill.yellow{background:var(--yellow)}
+.fill.red{background:var(--red)}
 
-.progress-bar{
-    height:100%;
-    border-radius:10px;
-    background:#2b91d7;
-}
-
-.progress-bar.green{
-    background:#35b779;
-}
-
-.progress-bar.yellow{
-    background:#d7a83e;
-}
-
-/* QUICK ACTION */
-.actions{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
+/* ACTIONS */
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .action{
-    background:#0a1725;
-    border:1px solid #20384f;
-    border-radius:10px;
-    padding:16px;
-    text-align:center;
-    cursor:pointer;
+ padding:16px;text-align:center;
+ background:#081522;border:1px solid #1c354b;
+ border-radius:9px;cursor:pointer
 }
+.action:hover{background:#102a41}
+.action div{font-size:21px;margin-bottom:7px}
+.action span{font-size:11px;color:#9bb0c1}
 
-.action:hover{
-    background:#10263b;
+/* NETWORK */
+.network{
+ display:flex;align-items:center;gap:13px;
+ padding:12px 0;border-bottom:1px solid #172c3e
 }
-
-.action-icon{
-    font-size:22px;
-    margin-bottom:8px;
+.network:last-child{border-bottom:0}
+.network-dot{
+ width:9px;height:9px;border-radius:50%;background:var(--green)
 }
-
-.action span{
-    display:block;
-    color:#a2b5c6;
-    font-size:12px;
-}
-
-/* LOGOUT */
-.logout{
-    margin-top:20px;
-    width:100%;
-    padding:11px;
-    border:1px solid #3b2930;
-    background:#20151a;
-    color:#ef8898;
-    border-radius:9px;
-    cursor:pointer;
-}
-
-.logout:hover{
-    background:#321920;
-}
-
-/* MOBILE */
-.mobile-menu{
-    display:none;
-    font-size:24px;
-    cursor:pointer;
-}
-
-.overlay{
-    display:none;
-}
+.network-dot.yellow{background:var(--yellow)}
+.network-dot.red{background:var(--red)}
+.network-info{flex:1}
+.network-info strong{font-size:12px}
+.network-info small{display:block;color:#61798e;margin-top:3px}
+.network-value{font-size:11px;color:#82a1b8}
 
 /* TOAST */
-.toast{
-    position:fixed;
-    right:25px;
-    bottom:25px;
-    background:#10283e;
-    border:1px solid #2a5c83;
-    color:white;
-    padding:14px 18px;
-    border-radius:10px;
-    display:none;
-    z-index:9999;
+#toast{
+ display:none;position:fixed;right:22px;bottom:22px;
+ padding:13px 17px;background:#12324c;
+ border:1px solid #2c6896;border-radius:9px;z-index:9999;
+ box-shadow:0 10px 30px #0008;font-size:12px
 }
 
 /* RESPONSIVE */
 @media(max-width:1100px){
-    .kpis{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
+ .kpis{grid-template-columns:repeat(2,1fr)}
+ .grid{grid-template-columns:1fr}
 }
-
-@media(max-width:750px){
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.3s;
-        z-index:1000;
-    }
-
-    .sidebar.open{
-        transform:translateX(0);
-    }
-
-    .main{
-        margin-left:0;
-        width:100%;
-    }
-
-    .mobile-menu{
-        display:block;
-    }
-
-    .topbar{
-        padding:0 15px;
-    }
-
-    .search{
-        display:none;
-    }
-
-    .content{
-        padding:18px;
-    }
-
-    .kpis{
-        grid-template-columns:1fr;
-    }
-
-    .actions{
-        grid-template-columns:1fr;
-    }
-
-    .admin-text{
-        display:none;
-    }
-
-    .overlay.show{
-        display:block;
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,.6);
-        z-index:999;
-    }
+@media(max-width:700px){
+ .sidebar{transform:translateX(-100%);transition:.25s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0;width:100%}
+ .mobile-btn{display:block}
+ .search{display:none}
+ .admin-text{display:none}
+ .topbar{padding:0 15px}
+ .content{padding:16px}
+ .kpis{grid-template-columns:1fr}
+ .grid.equal{grid-template-columns:1fr}
+ .actions{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginPage">
 
-    <div class="login-box">
+<div class="login-box">
 
-        <div class="logo">
-            <div class="logo-icon">🛡️</div>
-            <h1>Shield<span style="color:#39a5ef;">X</span></h1>
-            <p>Cybersecurity Platform</p>
-        </div>
+<div class="logo">
+<div class="logo-icon">🛡️</div>
+<h1>Shield<span>X</span></h1>
+<p>Cybersecurity Operations Center</p>
+</div>
 
-        <form id="loginForm">
+<form id="loginForm">
 
-            <div class="form-group">
-                <label>Email Address</label>
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required
-                >
-            </div>
+<div class="field">
+<label>Email Address</label>
+<input id="email" type="email" placeholder="Enter email" required>
+</div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                >
-            </div>
+<div class="field">
+<label>Password</label>
+<input id="password" type="password" placeholder="Enter password" required>
+</div>
 
-            <button class="login-btn" type="submit">
-                Sign In
-            </button>
+<button class="login-btn">Sign In to ShieldX</button>
 
-            <div class="error" id="loginError">
-                Incorrect email or password.
-            </div>
+<div class="login-error" id="loginError">
+Incorrect email or password.
+</div>
 
-        </form>
+</form>
 
-        <div class="demo-info">
-            <strong>Demo Login</strong><br>
-            Email: admin@shieldx.demo<br>
-            Password: ShieldX2026
-        </div>
+<div class="demo">
+<strong>Demo Credentials</strong><br>
+Email: admin@shieldx.demo<br>
+Password: ShieldX2026
+</div>
 
-    </div>
+</div>
+</div>
+
+
+<!-- ================= APPLICATION ================= -->
+
+<div id="app">
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+<div class="brand">
+<div class="brand-icon">🛡️</div>
+<h2>Shield<span>X</span></h2>
+</div>
+
+<div class="menu-title">Overview</div>
+
+<button class="nav active" onclick="showPage('dashboard',this)">
+<span class="nav-icon">▣</span>Dashboard
+</button>
+
+<button class="nav" onclick="showPage('threats',this)">
+<span class="nav-icon">⚡</span>Threat Detection
+<span class="nav-badge red">3</span>
+</button>
+
+<button class="nav" onclick="showPage('incidents',this)">
+<span class="nav-icon">🚨</span>Incidents
+<span class="nav-badge red">1</span>
+</button>
+
+<div class="menu-title">Security</div>
+
+<button class="nav" onclick="showPage('endpoints',this)">
+<span class="nav-icon">💻</span>Endpoint Security
+</button>
+
+<button class="nav" onclick="showPage('network',this)">
+<span class="nav-icon">🌐</span>Network Monitoring
+</button>
+
+<button class="nav" onclick="showPage('vulnerabilities',this)">
+<span class="nav-icon">🔎</span>Vulnerabilities
+<span class="nav-badge">131</span>
+</button>
+
+<div class="menu-title">Management</div>
+
+<button class="nav" onclick="showPage('reports',this)">
+<span class="nav-icon">📊</span>Reports
+</button>
+
+<button class="nav" onclick="showPage('compliance',this)">
+<span class="nav-icon">✓</span>Compliance
+</button>
+
+<button class="nav" onclick="showPage('settings',this)">
+<span class="nav-icon">⚙</span>Settings
+</button>
+
+<button class="logout" onclick="logout()">🚪 Logout</button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+<div class="mobile-btn" onclick="toggleSidebar()">☰</div>
+
+<div class="search">
+<input id="globalSearch" onkeyup="globalSearch()" placeholder="Search security events...">
+</div>
+
+<div class="top-right">
+
+<div class="notification" onclick="showToast('3 security notifications')">
+🔔
+<b>3</b>
+</div>
+
+<div class="admin">
+<div class="avatar">SA</div>
+<div class="admin-text">
+<strong>Security Admin</strong>
+<small>Administrator</small>
+</div>
+</div>
+
+</div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- DASHBOARD -->
+
+<div class="page active" id="dashboard">
+
+<div class="page-head">
+<div>
+<h1>Security Dashboard</h1>
+<p>Real-time overview of your organization's security posture.</p>
+</div>
+
+<div class="live">
+<span class="live-dot"></span>
+LIVE MONITORING
+</div>
+</div>
+
+
+<div class="kpis">
+
+<div class="card">
+<div class="kpi-top">
+<div class="kpi-title">Security Score</div>
+<div class="kpi-icon">🛡️</div>
+</div>
+<div class="kpi-num">94<span style="font-size:13px;color:#71889c">/100</span></div>
+<div class="up">↑ 4.2% from last month</div>
+</div>
+
+<div class="card">
+<div class="kpi-top">
+<div class="kpi-title">Protected Endpoints</div>
+<div class="kpi-icon">💻</div>
+</div>
+<div class="kpi-num">1,248</div>
+<div class="up">↑ 28 devices this week</div>
+</div>
+
+<div class="card">
+<div class="kpi-top">
+<div class="kpi-title">Active Threats</div>
+<div class="kpi-icon">⚡</div>
+</div>
+<div class="kpi-num" id="threatCount">3</div>
+<div class="warn">Requires attention</div>
+</div>
+
+<div class="card">
+<div class="kpi-top">
+<div class="kpi-title">Critical Incidents</div>
+<div class="kpi-icon">🚨</div>
+</div>
+<div class="kpi-num">1</div>
+<div class="down">Immediate action required</div>
+</div>
 
 </div>
 
 
-<!-- =========================
-     DASHBOARD
-========================= -->
-
-<div id="dashboardPage">
-
-    <div class="overlay" id="overlay"></div>
-
-    <div class="app">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-
-            <div class="brand">
-                <div class="brand-icon">🛡️</div>
-                <h2>Shield<span>X</span></h2>
-            </div>
-
-            <div class="menu">
-
-                <div class="menu-title">Main</div>
-
-                <a href="#" class="active">
-                    <span class="menu-icon">▣</span>
-                    Dashboard
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">⚡</span>
-                    Threat Detection
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">⚠</span>
-                    Incidents
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">💻</span>
-                    Endpoint Security
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">◈</span>
-                    Network Monitoring
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">🔎</span>
-                    Vulnerabilities
-                </a>
-
-                <div class="menu-title" style="margin-top:20px;">
-                    Management
-                </div>
-
-                <a href="#">
-                    <span class="menu-icon">📊</span>
-                    Reports
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">✓</span>
-                    Compliance
-                </a>
-
-                <a href="#">
-                    <span class="menu-icon">⚙</span>
-                    Settings
-                </a>
-
-                <button class="logout" onclick="logout()">
-                    🚪 Logout
-                </button>
-
-            </div>
-
-        </aside>
-
-
-        <!-- MAIN -->
-        <main class="main">
-
-            <!-- TOPBAR -->
-            <header class="topbar">
-
-                <div class="mobile-menu" onclick="toggleSidebar()">
-                    ☰
-                </div>
-
-                <div class="search">
-                    <input
-                        type="text"
-                        placeholder="Search security events..."
-                    >
-                </div>
-
-                <div class="top-right">
-
-                    <div class="notification">
-                        🔔
-                        <span class="badge">3</span>
-                    </div>
-
-                    <div class="admin">
-                        <div class="avatar">SA</div>
-
-                        <div class="admin-text">
-                            <strong>Security Admin</strong>
-                            <small>Administrator</small>
-                        </div>
-                    </div>
-
-                </div>
-
-            </header>
-
-
-            <!-- CONTENT -->
-            <section class="content">
-
-                <div class="page-title">
-                    <h1>Security Dashboard</h1>
-                    <p>Real-time overview of your organization's security posture.</p>
-                </div>
-
-
-                <!-- KPI CARDS -->
-                <div class="kpis">
-
-                    <div class="card">
-
-                        <div class="kpi-top">
-                            <div class="kpi-title">
-                                Security Score
-                            </div>
-
-                            <div class="kpi-icon">
-                                🛡️
-                            </div>
-                        </div>
-
-                        <div class="kpi-number">
-                            94<span style="font-size:15px;color:#71869a;">/100</span>
-                        </div>
-
-                        <div class="kpi-bottom">
-                            ↑ 4.2% from last month
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="kpi-top">
-                            <div class="kpi-title">
-                                Protected Endpoints
-                            </div>
-
-                            <div class="kpi-icon">
-                                💻
-                            </div>
-                        </div>
-
-                        <div class="kpi-number">
-                            1,248
-                        </div>
-
-                        <div class="kpi-bottom">
-                            ↑ 28 devices this week
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="kpi-top">
-                            <div class="kpi-title">
-                                Active Threats
-                            </div>
-
-                            <div class="kpi-icon">
-                                ⚡
-                            </div>
-                        </div>
-
-                        <div class="kpi-number" id="threatNumber">
-                            3
-                        </div>
-
-                        <div class="kpi-bottom" style="color:#e8a34b;">
-                            Requires attention
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="kpi-top">
-                            <div class="kpi-title">
-                                Critical Incidents
-                            </div>
-
-                            <div class="kpi-icon">
-                                🚨
-                            </div>
-                        </div>
-
-                        <div class="kpi-number">
-                            1
-                        </div>
-
-                        <div class="kpi-bottom" style="color:#e86a7c;">
-                            Immediate action required
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FIRST GRID -->
-                <div class="grid">
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Threat Activity</h3>
-                            <span>Last 7 days</span>
-                        </div>
-
-                        <div class="chart">
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:30%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:52%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:40%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:78%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:60%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:90%;"></div>
-                            </div>
-
-                            <div class="bar-box">
-                                <div class="bar" style="height:45%;"></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Enterprise Security Score</h3>
-                        </div>
-
-                        <div class="score-wrap">
-
-                            <div class="score-circle">
-                                <strong>94</strong>
-                                <span>Excellent</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SECOND GRID -->
-                <div class="grid">
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Recent Security Incidents</h3>
-                            <span>View all</span>
-                        </div>
-
-
-                        <div class="incident">
-
-                            <div class="incident-left">
-                                <div class="status-dot"></div>
-
-                                <div>
-                                    <div class="incident-title">
-                                        Suspicious PowerShell Activity
-                                    </div>
-
-                                    <div class="incident-time">
-                                        12 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="severity">
-                                Critical
-                            </div>
-
-                        </div>
-
-
-                        <div class="incident">
-
-                            <div class="incident-left">
-                                <div class="status-dot warning"></div>
-
-                                <div>
-                                    <div class="incident-title">
-                                        Multiple Failed Login Attempts
-                                    </div>
-
-                                    <div class="incident-time">
-                                        34 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="severity medium">
-                                Medium
-                            </div>
-
-                        </div>
-
-
-                        <div class="incident">
-
-                            <div class="incident-left">
-                                <div class="status-dot safe"></div>
-
-                                <div>
-                                    <div class="incident-title">
-                                        Malware Scan Completed
-                                    </div>
-
-                                    <div class="incident-time">
-                                        1 hour ago
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="severity low">
-                                Resolved
-                            </div>
-
-                        </div>
-
-
-                        <div class="incident">
-
-                            <div class="incident-left">
-                                <div class="status-dot warning"></div>
-
-                                <div>
-                                    <div class="incident-title">
-                                        Unusual Network Traffic
-                                    </div>
-
-                                    <div class="incident-time">
-                                        2 hours ago
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="severity medium">
-                                Medium
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Endpoint Security</h3>
-                        </div>
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Protected</span>
-                                <strong>96%</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar green"
-                                    style="width:96%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Needs Update</span>
-                                <strong>3%</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar yellow"
-                                    style="width:3%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Offline</span>
-                                <strong>1%</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar"
-                                    style="width:1%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- THIRD GRID -->
-                <div class="grid">
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Vulnerability Status</h3>
-                            <span>Updated today</span>
-                        </div>
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Critical</span>
-                                <strong>4</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar"
-                                    style="width:12%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>High</span>
-                                <strong>17</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar yellow"
-                                    style="width:35%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Medium</span>
-                                <strong>42</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar"
-                                    style="width:55%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="progress-item">
-
-                            <div class="progress-head">
-                                <span>Low</span>
-                                <strong>68</strong>
-                            </div>
-
-                            <div class="progress">
-                                <div
-                                    class="progress-bar green"
-                                    style="width:75%;">
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3>Quick Actions</h3>
-                        </div>
-
-                        <div class="actions">
-
-                            <div class="action" onclick="showToast('Security scan started')">
-                                <div class="action-icon">🔍</div>
-                                <span>Run Scan</span>
-                            </div>
-
-                            <div class="action" onclick="showToast('Report generated')">
-                                <div class="action-icon">📄</div>
-                                <span>Generate Report</span>
-                            </div>
-
-                            <div class="action" onclick="showToast('Threat investigation opened')">
-                                <div class="action-icon">🚨</div>
-                                <span>Investigate Threat</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-    </div>
+<div class="grid">
+
+<div class="card">
+<div class="card-head">
+<h3>Threat Activity</h3>
+<span>Last 7 days</span>
+</div>
+
+<div class="chart">
+
+<div class="chart-col"><div class="chart-bar" style="height:28%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:48%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:37%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:75%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:55%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:88%"></div></div>
+<div class="chart-col"><div class="chart-bar" style="height:45%"></div></div>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+<h3>Security Score</h3>
+<span>Enterprise</span>
+</div>
+
+<div class="score">
+<div class="circle">
+<strong>94</strong>
+<span>Excellent</span>
+</div>
+</div>
+
+</div>
 
 </div>
 
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="grid equal">
+
+<div class="card">
+
+<div class="card-head">
+<h3>Recent Security Incidents</h3>
+<span>Today</span>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Incident</th>
+<th>Severity</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Suspicious PowerShell Activity</td>
+<td><span class="status critical">Critical</span></td>
+<td><span class="status info">Investigating</span></td>
+</tr>
+
+<tr>
+<td>Multiple Failed Login Attempts</td>
+<td><span class="status high">High</span></td>
+<td><span class="status info">Monitoring</span></td>
+</tr>
+
+<tr>
+<td>Malware Scan Completed</td>
+<td><span class="status safe">Low</span></td>
+<td><span class="status safe">Resolved</span></td>
+</tr>
+
+<tr>
+<td>Unusual Network Traffic</td>
+<td><span class="status high">High</span></td>
+<td><span class="status info">Monitoring</span></td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+<h3>Endpoint Security</h3>
+<span>1,248 devices</span>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>Protected</span><strong>96%</strong></div>
+<div class="progress"><div class="fill green" style="width:96%"></div></div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>Needs Update</span><strong>3%</strong></div>
+<div class="progress"><div class="fill yellow" style="width:3%"></div></div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>Offline</span><strong>1%</strong></div>
+<div class="progress"><div class="fill red" style="width:1%"></div></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="grid equal">
+
+<div class="card">
+
+<div class="card-head">
+<h3>Network Status</h3>
+<span>Live</span>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Core Network</strong>
+<small>All systems operational</small>
+</div>
+<div class="network-value">1.2 Gbps</div>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Cloud Gateway</strong>
+<small>Normal traffic</small>
+</div>
+<div class="network-value">846 Mbps</div>
+</div>
+
+<div class="network">
+<div class="network-dot yellow"></div>
+<div class="network-info">
+<strong>VPN Gateway</strong>
+<small>Elevated traffic</small>
+</div>
+<div class="network-value">512 Mbps</div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+<h3>Quick Actions</h3>
+</div>
+
+<div class="actions">
+
+<div class="action" onclick="showToast('Security scan started')">
+<div>🔍</div>
+<span>Run Scan</span>
+</div>
+
+<div class="action" onclick="showToast('Security report generated')">
+<div>📄</div>
+<span>Generate Report</span>
+</div>
+
+<div class="action" onclick="showToast('Threat investigation opened')">
+<div>🚨</div>
+<span>Investigate</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- THREATS -->
+
+<div class="page" id="threats">
+
+<div class="page-head">
+<div>
+<h1>Threat Detection</h1>
+<p>Monitor and investigate detected security threats.</p>
+</div>
+<div class="live"><span class="live-dot"></span>ENGINE ACTIVE</div>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<h3>Detected Threats</h3>
+<span>Real-time feed</span>
+</div>
+
+<div class="table-wrap">
+<table id="threatTable">
+<thead>
+<tr>
+<th>Threat</th>
+<th>Source</th>
+<th>Severity</th>
+<th>Status</th>
+<th>Detected</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>PowerShell Execution</td>
+<td>WIN-DEV-1042</td>
+<td><span class="status critical">Critical</span></td>
+<td><span class="status info">Investigating</span></td>
+<td>12 min ago</td>
+</tr>
+
+<tr>
+<td>Credential Brute Force</td>
+<td>10.24.8.17</td>
+<td><span class="status high">High</span></td>
+<td><span class="status info">Monitoring</span></td>
+<td>34 min ago</td>
+</tr>
+
+<tr>
+<td>Suspicious DNS Query</td>
+<td>WIN-SRV-220</td>
+<td><span class="status medium">Medium</span></td>
+<td><span class="status safe">Contained</span></td>
+<td>48 min ago</td>
+</tr>
+
+<tr>
+<td>Malicious File Hash</td>
+<td>WIN-USER-332</td>
+<td><span class="status high">High</span></td>
+<td><span class="status info">Investigating</span></td>
+<td>1 hr ago</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+
+<!-- INCIDENTS -->
+
+<div class="page" id="incidents">
+
+<div class="page-head">
+<div>
+<h1>Incident Management</h1>
+<p>Track, investigate and resolve security incidents.</p>
+</div>
+</div>
+
+<div class="kpis">
+
+<div class="card">
+<div class="kpi-title">Open Incidents</div>
+<div class="kpi-num">8</div>
+<div class="warn">Requires review</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Critical</div>
+<div class="kpi-num">1</div>
+<div class="down">Immediate action</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Resolved Today</div>
+<div class="kpi-num">17</div>
+<div class="up">↑ 12%</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Avg Response</div>
+<div class="kpi-num">14m</div>
+<div class="up">Improving</div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:16px">
+
+<div class="card-head">
+<h3>Incident Queue</h3>
+<span>8 active</span>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Incident</th>
+<th>Priority</th>
+<th>Analyst</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>#INC-2048</td>
+<td>Suspicious PowerShell Activity</td>
+<td><span class="status critical">Critical</span></td>
+<td>Security Admin</td>
+<td><span class="status info">Investigating</span></td>
+</tr>
+
+<tr>
+<td>#INC-2047</td>
+<td>Failed Authentication Spike</td>
+<td><span class="status high">High</span></td>
+<td>SOC Analyst</td>
+<td><span class="status info">Monitoring</span></td>
+</tr>
+
+<tr>
+<td>#INC-2046</td>
+<td>Unusual DNS Traffic</td>
+<td><span class="status medium">Medium</span></td>
+<td>SOC Analyst</td>
+<td><span class="status safe">Contained</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+
+<!-- ENDPOINTS -->
+
+<div class="page" id="endpoints">
+
+<div class="page-head">
+<div>
+<h1>Endpoint Security</h1>
+<p>Monitor protected devices across the organization.</p>
+</div>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<h3>Endpoint Inventory</h3>
+<span>1,248 endpoints</span>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>OS</th>
+<th>Risk</th>
+<th>Last Seen</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>WIN-DEV-1042</td>
+<td>Windows 11</td>
+<td><span class="status critical">High</span></td>
+<td>1 min ago</td>
+<td><span class="status safe">Online</span></td>
+</tr>
+
+<tr>
+<td>WIN-SRV-220</td>
+<td>Windows Server</td>
+<td><span class="status medium">Medium</span></td>
+<td>2 min ago</td>
+<td><span class="status safe">Online</span></td>
+</tr>
+
+<tr>
+<td>MAC-DESIGN-81</td>
+<td>macOS</td>
+<td><span class="status safe">Low</span></td>
+<td>4 min ago</td>
+<td><span class="status safe">Online</span></td>
+</tr>
+
+<tr>
+<td>WIN-USER-332</td>
+<td>Windows 10</td>
+<td><span class="status high">High</span></td>
+<td>18 min ago</td>
+<td><span class="status high">Update Required</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+
+<!-- NETWORK -->
+
+<div class="page" id="network">
+
+<div class="page-head">
+<div>
+<h1>Network Monitoring</h1>
+<p>Monitor network traffic and infrastructure health.</p>
+</div>
+<div class="live"><span class="live-dot"></span>NETWORK LIVE</div>
+</div>
+
+<div class="kpis">
+
+<div class="card">
+<div class="kpi-title">Traffic</div>
+<div class="kpi-num">2.8 TB</div>
+<div class="up">Normal</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Connections</div>
+<div class="kpi-num">18,492</div>
+<div class="up">Active</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Blocked</div>
+<div class="kpi-num">347</div>
+<div class="warn">Today</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Network Health</div>
+<div class="kpi-num">99.8%</div>
+<div class="up">Excellent</div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:16px">
+
+<div class="card-head">
+<h3>Network Infrastructure</h3>
+<span>Live status</span>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Primary Firewall</strong>
+<small>All services operational</small>
+</div>
+<div class="network-value">Healthy</div>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Core Router</strong>
+<small>Normal traffic levels</small>
+</div>
+<div class="network-value">Healthy</div>
+</div>
+
+<div class="network">
+<div class="network-dot yellow"></div>
+<div class="network-info">
+<strong>VPN Gateway</strong>
+<small>Elevated connections</small>
+</div>
+<div class="network-value">Warning</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VULNERABILITIES -->
+
+<div class="page" id="vulnerabilities">
+
+<div class="page-head">
+<div>
+<h1>Vulnerability Management</h1>
+<p>Identify and prioritize security weaknesses.</p>
+</div>
+</div>
+
+<div class="kpis">
+
+<div class="card">
+<div class="kpi-title">Critical</div>
+<div class="kpi-num">4</div>
+<div class="down">Patch immediately</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">High</div>
+<div class="kpi-num">17</div>
+<div class="warn">High priority</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Medium</div>
+<div class="kpi-num">42</div>
+<div class="warn">Review</div>
+</div>
+
+<div class="card">
+<div class="kpi-title">Low</div>
+<div class="kpi-num">68</div>
+<div class="up">Low risk</div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:16px">
+
+<div class="card-head">
+<h3>Top Vulnerabilities</h3>
+<span>131 findings</span>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>CVE</th>
+<th>Description</th>
+<th>Severity</th>
+<th>Affected</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CVE-2026-1042</td>
+<td>Remote service vulnerability</td>
+<td><span class="status critical">Critical</span></td>
+<td>14</td>
+</tr>
+
+<tr>
+<td>CVE-2026-0881</td>
+<td>Authentication bypass</td>
+<td><span class="status high">High</span></td>
+<td>27</td>
+</tr>
+
+<tr>
+<td>CVE-2026-0715</td>
+<td>Memory corruption issue</td>
+<td><span class="status medium">Medium</span></td>
+<td>53</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<!-- REPORTS -->
+
+<div class="page" id="reports">
+
+<div class="page-head">
+<div>
+<h1>Security Reports</h1>
+<p>Generate and review security intelligence.</p>
+</div>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<h3>Available Reports</h3>
+</div>
+
+<div class="actions">
+
+<div class="action" onclick="showToast('Weekly security report generated')">
+<div>📊</div>
+<span>Weekly Security</span>
+</div>
+
+<div class="action" onclick="showToast('Threat report generated')">
+<div>⚡</div>
+<span>Threat Report</span>
+</div>
+
+<div class="action" onclick="showToast('Compliance report generated')">
+<div>✓</div>
+<span>Compliance</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- COMPLIANCE -->
+
+<div class="page" id="compliance">
+
+<div class="page-head">
+<div>
+<h1>Compliance</h1>
+<p>Monitor organizational security compliance.</p>
+</div>
+</div>
+
+<div class="grid equal">
+
+<div class="card">
+
+<div class="card-head">
+<h3>Compliance Score</h3>
+<span>Enterprise</span>
+</div>
+
+<div class="score">
+<div class="circle">
+<strong>91</strong>
+<span>Compliant</span>
+</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<h3>Frameworks</h3>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>SOC 2</span><strong>96%</strong></div>
+<div class="progress"><div class="fill green" style="width:96%"></div></div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>ISO 27001</span><strong>92%</strong></div>
+<div class="progress"><div class="fill green" style="width:92%"></div></div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label"><span>NIST</span><strong>88%</strong></div>
+<div class="progress"><div class="fill yellow" style="width:88%"></div></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div class="page" id="settings">
+
+<div class="page-head">
+<div>
+<h1>Settings</h1>
+<p>Configure your ShieldX demonstration environment.</p>
+</div>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<h3>Security Settings</h3>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Real-time Threat Monitoring</strong>
+<small>Continuous monitoring enabled</small>
+</div>
+<div class="network-value">ON</div>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Endpoint Protection</strong>
+<small>All supported devices protected</small>
+</div>
+<div class="network-value">ON</div>
+</div>
+
+<div class="network">
+<div class="network-dot"></div>
+<div class="network-info">
+<strong>Security Notifications</strong>
+<small>Critical alerts enabled</small>
+</div>
+<div class="network-value">ON</div>
+</div>
+
+</div>
+
+</div>
+
+
+</section>
+</main>
+</div>
+</div>
+
+
+<div id="toast"></div>
 
 
 <script>
 
-/* ==========================================
-   SHIELDX LOGIN SYSTEM
-========================================== */
+/* ================================
+   LOGIN
+================================ */
 
-const loginPage = document.getElementById("loginPage");
-const dashboardPage = document.getElementById("dashboardPage");
-const loginForm = document.getElementById("loginForm");
-const loginError = document.getElementById("loginError");
-
-
-/* CHECK LOGIN */
+const loginPage=document.getElementById("loginPage");
+const app=document.getElementById("app");
+const loginForm=document.getElementById("loginForm");
+const loginError=document.getElementById("loginError");
 
 function checkLogin(){
 
-    if(localStorage.getItem("shieldxDemoLoggedIn") === "true"){
-
-        loginPage.style.display = "none";
-        dashboardPage.style.display = "block";
-
-    }else{
-
-        loginPage.style.display = "flex";
-        dashboardPage.style.display = "none";
-
-    }
-
+ if(localStorage.getItem("shieldxDemoLoggedIn")==="true"){
+   loginPage.style.display="none";
+   app.style.display="block";
+ }else{
+   loginPage.style.display="flex";
+   app.style.display="none";
+ }
 }
 
+loginForm.addEventListener("submit",function(e){
 
-/* LOGIN */
+ e.preventDefault();
 
-loginForm.addEventListener("submit", function(e){
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
 
-    e.preventDefault();
+ if(email==="admin@shieldx.demo" && password==="ShieldX2026"){
 
-    const email =
-        document.getElementById("email").value.trim();
+   localStorage.setItem("shieldxDemoLoggedIn","true");
 
-    const password =
-        document.getElementById("password").value;
+   loginError.style.display="none";
 
+   checkLogin();
 
-    if(
-        email === "admin@shieldx.demo" &&
-        password === "ShieldX2026"
-    ){
+   showToast("Successfully signed in");
 
-        localStorage.setItem(
-            "shieldxDemoLoggedIn",
-            "true"
-        );
+ }else{
 
-        loginError.style.display = "none";
+   loginError.style.display="block";
 
-        checkLogin();
-
-        showToast("Login successful");
-
-    }else{
-
-        loginError.style.display = "block";
-
-    }
+ }
 
 });
 
-
-/* LOGOUT */
 
 function logout(){
 
-    localStorage.removeItem(
-        "shieldxDemoLoggedIn"
-    );
+ localStorage.removeItem("shieldxDemoLoggedIn");
 
-    checkLogin();
+ checkLogin();
 
-    showToast("You have been logged out");
+ showToast("Logged out successfully");
 
 }
 
 
-/* TOAST */
+/* ================================
+   PAGE NAVIGATION
+================================ */
 
-function showToast(message){
+function showPage(pageId,button){
 
-    const toast =
-        document.getElementById("toast");
+ document.querySelectorAll(".page").forEach(function(page){
+   page.classList.remove("active");
+ });
 
-    toast.textContent = message;
+ const page=document.getElementById(pageId);
 
-    toast.style.display = "block";
+ if(page){
+   page.classList.add("active");
+ }
 
-    setTimeout(function(){
+ document.querySelectorAll(".nav").forEach(function(nav){
+   nav.classList.remove("active");
+ });
 
-        toast.style.display = "none";
+ if(button){
+   button.classList.add("active");
+ }
 
-    },2500);
+ document.getElementById("sidebar").classList.remove("open");
+
+ window.scrollTo({
+   top:0,
+   behavior:"smooth"
+ });
 
 }
 
 
-/* MOBILE SIDEBAR */
+/* ================================
+   MOBILE MENU
+================================ */
 
 function toggleSidebar(){
 
-    const sidebar =
-        document.getElementById("sidebar");
-
-    const overlay =
-        document.getElementById("overlay");
-
-    sidebar.classList.toggle("open");
-
-    overlay.classList.toggle("show");
+ document
+ .getElementById("sidebar")
+ .classList.toggle("open");
 
 }
 
 
-document
-.getElementById("overlay")
-.addEventListener("click", function(){
+/* ================================
+   TOAST
+================================ */
 
-    document
-    .getElementById("sidebar")
-    .classList.remove("open");
+let toastTimer;
 
-    this.classList.remove("show");
+function showToast(message){
 
-});
+ const toast=document.getElementById("toast");
+
+ toast.textContent=message;
+
+ toast.style.display="block";
+
+ clearTimeout(toastTimer);
+
+ toastTimer=setTimeout(function(){
+
+   toast.style.display="none";
+
+ },2500);
+
+}
 
 
-/* SIMULATED LIVE THREAT UPDATE */
+/* ================================
+   GLOBAL SEARCH
+================================ */
+
+function globalSearch(){
+
+ const value=
+ document.getElementById("globalSearch")
+ .value
+ .toLowerCase()
+ .trim();
+
+ if(!value) return;
+
+ const rows=document.querySelectorAll("tbody tr");
+
+ rows.forEach(function(row){
+
+   const text=row.innerText.toLowerCase();
+
+   row.style.display=
+   text.includes(value) ? "" : "none";
+
+ });
+
+}
+
+
+/* ================================
+   SIMULATED LIVE THREATS
+================================ */
 
 setInterval(function(){
 
-    if(
-        localStorage.getItem("shieldxDemoLoggedIn")
-        === "true"
-    ){
+ if(localStorage.getItem("shieldxDemoLoggedIn")==="true"){
 
-        const number =
-            document.getElementById("threatNumber");
+   const el=document.getElementById("threatCount");
 
-        if(number){
+   if(el){
 
-            const random =
-                Math.floor(Math.random()*5)+1;
+     const number=Math.floor(Math.random()*5)+1;
 
-            number.textContent = random;
+     el.textContent=number;
 
-        }
+   }
 
-    }
+ }
 
 },8000);
 
 
-/* START */
+/* ================================
+   START
+================================ */
 
 checkLogin();
 
