@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ShieldX | Threat Detection</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#e8eef7;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:245px;
+    height:100vh;
+    background:#0a1628;
+    border-right:1px solid #1b2b40;
+    padding:22px 15px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 10px 28px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#19c37d,#0ea5e9);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.logo h2{
+    font-size:19px;
+}
+
+.logo span{
+    font-size:9px;
+    color:#8190a4;
+    letter-spacing:1.5px;
+}
+
+.menu-title{
+    color:#64768d;
+    font-size:10px;
+    letter-spacing:1.5px;
+    margin:12px 12px 9px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.nav a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 12px;
+    border-radius:8px;
+    color:#8fa0b5;
+    font-size:13px;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:#13263c;
+    color:#fff;
+}
+
+.nav a.active{
+    border-left:3px solid #19c37d;
+}
+
+.icon{
+    width:20px;
+    text-align:center;
+}
+
+.bottom-status{
+    position:absolute;
+    bottom:20px;
+    left:15px;
+    right:15px;
+    background:#0d2034;
+    border:1px solid #1d3852;
+    padding:14px;
+    border-radius:11px;
+}
+
+.status{
+    font-size:11px;
+    color:#91a2b6;
+}
+
+.dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#19c37d;
+    box-shadow:0 0 9px #19c37d;
+    margin-right:6px;
+}
+
+.bottom-status strong{
+    display:block;
+    margin-top:7px;
+    font-size:12px;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    border-bottom:1px solid #17283d;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+}
+
+.search{
+    width:340px;
+    padding:10px 14px;
+    border-radius:8px;
+    border:1px solid #1c3046;
+    background:#0c1b2d;
+    color:white;
+    outline:none;
+}
+
+.search::placeholder{
+    color:#64768b;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.bell{
+    cursor:pointer;
+    font-size:19px;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    border-left:1px solid #203248;
+    padding-left:17px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    background:#17324a;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#70d9b1;
+    font-weight:bold;
+}
+
+.user small{
+    display:block;
+    color:#687b91;
+    font-size:9px;
+    margin-top:3px;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+.heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.heading h1{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.heading p{
+    color:#778ba2;
+    font-size:12px;
+}
+
+.demo-badge{
+    background:#102a3e;
+    border:1px solid #1b4860;
+    color:#55c9f2;
+    padding:9px 13px;
+    border-radius:7px;
+    font-size:10px;
+}
+
+/* SUMMARY */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.summary-card{
+    background:#0b1a2c;
+    border:1px solid #1a2d43;
+    border-radius:11px;
+    padding:18px;
+}
+
+.summary-card span{
+    color:#7c8fa5;
+    font-size:10px;
+}
+
+.summary-card strong{
+    display:block;
+    font-size:25px;
+    margin-top:10px;
+}
+
+.red{
+    color:#ef4444;
+}
+
+.orange{
+    color:#f59e0b;
+}
+
+.green{
+    color:#19c37d;
+}
+
+/* FILTER BAR */
+
+.filters{
+    background:#0b1a2c;
+    border:1px solid #1a2d43;
+    border-radius:11px;
+    padding:16px;
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.filter{
+    background:#0d2034;
+    color:#8da0b6;
+    border:1px solid #20364d;
+    padding:9px 12px;
+    border-radius:7px;
+    outline:none;
+    font-size:11px;
+}
+
+.filter:focus{
+    border-color:#19c37d;
+}
+
+/* TABLE */
+
+.table-panel{
+    background:#0b1a2c;
+    border:1px solid #1a2d43;
+    border-radius:11px;
+    overflow:hidden;
+}
+
+.table-header{
+    padding:17px 19px;
+    border-bottom:1px solid #172a40;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.table-header h3{
+    font-size:14px;
+}
+
+.live{
+    color:#19c37d;
+    font-size:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    padding:13px 17px;
+    color:#60748b;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    background:#091728;
+}
+
+td{
+    padding:15px 17px;
+    border-top:1px solid #15263a;
+    font-size:11px;
+    color:#b8c5d4;
+}
+
+tr:hover{
+    background:#0e2033;
+}
+
+.threat-id{
+    color:#46b9e8;
+    font-weight:bold;
+}
+
+.severity{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:5px;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.critical{
+    color:#ff7070;
+    background:#35191f;
+}
+
+.high{
+    color:#ffb347;
+    background:#352a18;
+}
+
+.medium{
+    color:#e6cf48;
+    background:#342f16;
+}
+
+.low{
+    color:#55d9a4;
+    background:#123126;
+}
+
+.status-badge{
+    color:#8fa3b8;
+    background:#152a40;
+    padding:5px 8px;
+    border-radius:5px;
+    font-size:8px;
+}
+
+.action{
+    border:0;
+    background:#132d43;
+    color:#55c8ef;
+    padding:6px 9px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:9px;
+}
+
+.action:hover{
+    background:#193c58;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#10243a;
+    border:1px solid #24425d;
+    padding:13px 17px;
+    border-radius:8px;
+    font-size:11px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .table-panel{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:850px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        position:static;
+        width:100%;
+        height:auto;
+    }
+
+    .bottom-status{
+        display:none;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .search{
+        width:180px;
+    }
+
+    .content{
+        padding:20px 15px;
+    }
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+    .heading h1{
+        font-size:22px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🛡️
+        </div>
+
+        <div>
+            <h2>ShieldX</h2>
+            <span>CYBERSECURITY</span>
+        </div>
+
+    </div>
+
+    <div class="menu-title">
+        Security Operations
+    </div>
+
+    <nav class="nav">
+
+        <a href="index.html">
+            <span class="icon">▦</span>
+            Dashboard
+        </a>
+
+        <a href="threats.html" class="active">
+            <span class="icon">⚠</span>
+            Threat Detection
+        </a>
+
+        <a href="incidents.html">
+            <span class="icon">◉</span>
+            Incidents
+        </a>
+
+        <a href="endpoints.html">
+            <span class="icon">▣</span>
+            Endpoint Security
+        </a>
+
+        <a href="network.html">
+            <span class="icon">⌁</span>
+            Network Monitoring
+        </a>
+
+        <a href="vulnerabilities.html">
+            <span class="icon">◆</span>
+            Vulnerabilities
+        </a>
+
+        <div class="menu-title">
+            Management
+        </div>
+
+        <a href="reports.html">
+            <span class="icon">▤</span>
+            Reports
+        </a>
+
+        <a href="compliance.html">
+            <span class="icon">✓</span>
+            Compliance
+        </a>
+
+        <a href="settings.html">
+            <span class="icon">⚙</span>
+            Settings
+        </a>
+
+    </nav>
+
+    <div class="bottom-status">
+
+        <div class="status">
+            <span class="dot"></span>
+            All systems operational
+        </div>
+
+        <strong>Protection Active</strong>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <input
+        class="search"
+        placeholder="Search threats..."
+        onkeyup="searchThreats(this.value)"
+    >
+
+    <div class="top-right">
+
+        <div class="bell" onclick="showToast('3 security notifications')">
+            🔔
+        </div>
+
+        <div class="user">
+
+            <div class="avatar">
+                SX
+            </div>
+
+            <div>
+                <strong>Security Admin</strong>
+                <small>Enterprise Account</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+
+<div class="heading">
+
+    <div>
+
+        <h1>Threat Detection</h1>
+
+        <p>
+            Monitor and investigate detected security events across the environment.
+        </p>
+
+    </div>
+
+    <div class="demo-badge">
+        DEMO ENVIRONMENT
+    </div>
+
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+    <div class="summary-card">
+        <span>Active Threats</span>
+        <strong class="red">3</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>High Priority</span>
+        <strong class="orange">6</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>Blocked Today</span>
+        <strong class="green">284</strong>
+    </div>
+
+    <div class="summary-card">
+        <span>Events Analyzed</span>
+        <strong>18,492</strong>
+    </div>
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+    <select class="filter" id="severityFilter" onchange="filterThreats()">
+
+        <option value="all">
+            All Severity
+        </option>
+
+        <option value="critical">
+            Critical
+        </option>
+
+        <option value="high">
+            High
+        </option>
+
+        <option value="medium">
+            Medium
+        </option>
+
+        <option value="low">
+            Low
+        </option>
+
+    </select>
+
+
+    <select class="filter">
+
+        <option>
+            All Sources
+        </option>
+
+        <option>
+            Endpoint
+        </option>
+
+        <option>
+            Network
+        </option>
+
+        <option>
+            Authentication
+        </option>
+
+    </select>
+
+
+    <select class="filter">
+
+        <option>
+            All Status
+        </option>
+
+        <option>
+            Investigating
+        </option>
+
+        <option>
+            Monitoring
+        </option>
+
+        <option>
+            Blocked
+        </option>
+
+        <option>
+            Resolved
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- THREAT TABLE -->
+
+<div class="table-panel">
+
+    <div class="table-header">
+
+        <h3>
+            Detected Threats
+        </h3>
+
+        <span class="live">
+            ● Monitoring
+        </span>
+
+    </div>
+
+
+<table id="threatTable">
+
+<thead>
+
+<tr>
+
+    <th>Threat ID</th>
+    <th>Threat</th>
+    <th>Severity</th>
+    <th>Source</th>
+    <th>Detected</th>
+    <th>Status</th>
+    <th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+
+<tr data-severity="critical">
+
+<td class="threat-id">
+TX-10482
+</td>
+
+<td>
+Suspicious Authentication Activity
+</td>
+
+<td>
+<span class="severity critical">
+CRITICAL
+</span>
+</td>
+
+<td>
+Authentication
+</td>
+
+<td>
+8 min ago
+</td>
+
+<td>
+<span class="status-badge">
+Investigating
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10482')">
+View
+</button>
+</td>
+
+</tr>
+
+
+<tr data-severity="high">
+
+<td class="threat-id">
+TX-10481
+</td>
+
+<td>
+Unusual Network Traffic
+</td>
+
+<td>
+<span class="severity high">
+HIGH
+</span>
+</td>
+
+<td>
+Network
+</td>
+
+<td>
+21 min ago
+</td>
+
+<td>
+<span class="status-badge">
+Monitoring
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10481')">
+View
+</button>
+</td>
+
+</tr>
+
+
+<tr data-severity="high">
+
+<td class="threat-id">
+TX-10480
+</td>
+
+<td>
+Potential Malware Activity
+</td>
+
+<td>
+<span class="severity high">
+HIGH
+</span>
+</td>
+
+<td>
+Endpoint
+</td>
+
+<td>
+34 min ago
+</td>
+
+<td>
+<span class="status-badge">
+Blocked
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10480')">
+View
+</button>
+</td>
+
+</tr>
+
+
+<tr data-severity="medium">
+
+<td class="threat-id">
+TX-10479
+</td>
+
+<td>
+Outdated Security Configuration
+</td>
+
+<td>
+<span class="severity medium">
+MEDIUM
+</span>
+</td>
+
+<td>
+Endpoint
+</td>
+
+<td>
+1 hour ago
+</td>
+
+<td>
+<span class="status-badge">
+Monitoring
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10479')">
+View
+</button>
+</td>
+
+</tr>
+
+
+<tr data-severity="medium">
+
+<td class="threat-id">
+TX-10478
+</td>
+
+<td>
+Unusual Login Pattern
+</td>
+
+<td>
+<span class="severity medium">
+MEDIUM
+</span>
+</td>
+
+<td>
+Authentication
+</td>
+
+<td>
+2 hours ago
+</td>
+
+<td>
+<span class="status-badge">
+Resolved
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10478')">
+View
+</button>
+</td>
+
+</tr>
+
+
+<tr data-severity="low">
+
+<td class="threat-id">
+TX-10477
+</td>
+
+<td>
+Policy Configuration Warning
+</td>
+
+<td>
+<span class="severity low">
+LOW
+</span>
+</td>
+
+<td>
+Endpoint
+</td>
+
+<td>
+3 hours ago
+</td>
+
+<td>
+<span class="status-badge">
+Resolved
+</span>
+</td>
+
+<td>
+<button class="action"
+onclick="viewThreat('TX-10477')">
+View
+</button>
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</main>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+function viewThreat(id){
+
+    showToast(
+        "Threat " + id + " selected — Demo details coming next."
+    );
+
+}
+
+
+function filterThreats(){
+
+    const selected =
+        document.getElementById("severityFilter").value;
+
+    const rows =
+        document.querySelectorAll("#threatTable tbody tr");
+
+    rows.forEach(function(row){
+
+        const severity =
+            row.getAttribute("data-severity");
+
+        if(selected === "all" || severity === selected){
+
+            row.style.display="table-row";
+
+        }else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+}
+
+
+function searchThreats(value){
+
+    const search =
+        value.toLowerCase();
+
+    const rows =
+        document.querySelectorAll("#threatTable tbody tr");
+
+    rows.forEach(function(row){
+
+        const text =
+            row.innerText.toLowerCase();
+
+        if(text.includes(search)){
+
+            row.style.display="table-row";
+
+        }else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
