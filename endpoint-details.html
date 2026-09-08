@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endpoint Details - ShieldX</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #101828;
+    color: white;
+    padding: 24px 16px;
+    overflow-y: auto;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    padding: 0 12px 28px;
+    letter-spacing: 0.5px;
+}
+
+.logo span {
+    color: #4f8cff;
+}
+
+.section-title {
+    font-size: 11px;
+    color: #8490a5;
+    text-transform: uppercase;
+    margin: 20px 12px 8px;
+    letter-spacing: 1px;
+}
+
+.nav-item {
+    display: block;
+    color: #b9c2d0;
+    text-decoration: none;
+    padding: 11px 12px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #1b2638;
+    color: white;
+}
+
+.nav-item.active {
+    background: #1d4ed8;
+    color: white;
+    font-weight: 600;
+}
+
+.main {
+    margin-left: 250px;
+    padding: 28px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #687386;
+}
+
+.breadcrumb a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.demo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.demo-dot {
+    width: 7px;
+    height: 7px;
+    background: #f97316;
+    border-radius: 50%;
+}
+
+.page-header {
+    background: white;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(16,24,40,0.04);
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.device-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+h1 {
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #667085;
+    font-size: 14px;
+}
+
+.status-area {
+    text-align: right;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #ecfdf3;
+    color: #027a48;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.last-seen {
+    color: #667085;
+    font-size: 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-light {
+    background: #f2f4f7;
+    color: #344054;
+}
+
+.btn-danger {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    padding: 21px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(16,24,40,0.04);
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.info-item {
+    background: #f8fafc;
+    border-radius: 9px;
+    padding: 13px;
+}
+
+.info-label {
+    font-size: 11px;
+    color: #667085;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+    word-break: break-word;
+}
+
+.risk-card {
+    text-align: center;
+}
+
+.risk-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 10px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto 15px;
+    position: relative;
+}
+
+.risk-circle::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    border-top-color: #22c55e;
+    border-right-color: #22c55e;
+    transform: rotate(-30deg);
+}
+
+.risk-number {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.risk-label {
+    color: #667085;
+    font-size: 13px;
+}
+
+.risk-status {
+    display: inline-block;
+    margin-top: 12px;
+    background: #ecfdf3;
+    color: #027a48;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.progress-item {
+    margin-bottom: 17px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.progress-header span:last-child {
+    font-weight: 700;
+}
+
+.progress {
+    height: 8px;
+    background: #eaecf0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    background: #2563eb;
+}
+
+.timeline {
+    position: relative;
+    margin-top: 5px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 32px;
+    padding-bottom: 22px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #2563eb;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.timeline-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 15px;
+    width: 2px;
+    height: calc(100% - 8px);
+    background: #dbe3ef;
+}
+
+.timeline-time {
+    font-size: 11px;
+    color: #667085;
+    margin-bottom: 4px;
+}
+
+.timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.timeline-text {
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.module-list {
+    display: grid;
+    gap: 10px;
+}
+
+.module {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.module-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.module-status {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 9px;
+    border-radius: 15px;
+}
+
+.enabled {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.warning {
+    background: #fffaeb;
+    color: #b54708;
+}
+
+.security-list {
+    display: grid;
+    gap: 12px;
+}
+
+.security-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.security-row:last-child {
+    border-bottom: none;
+}
+
+.security-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.security-description {
+    color: #667085;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: 20px;
+    background: #22c55e;
+    position: relative;
+}
+
+.toggle::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+.notes textarea {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    padding: 12px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.notes textarea:focus {
+    border-color: #2563eb;
+}
+
+.footer-note {
+    text-align: center;
+    color: #98a2b3;
+    font-size: 11px;
+    margin-top: 8px;
+    padding-bottom: 20px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #101828;
+    color: white;
+    padding: 13px 18px;
+    border-radius: 9px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1000px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 16px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-main {
+        flex-direction: column;
+    }
+
+    .status-area {
+        text-align: left;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Shield<span>X</span>
+    </div>
+
+    <div class="section-title">Security Operations</div>
+
+    <a href="index.html" class="nav-item">Dashboard</a>
+    <a href="threats.html" class="nav-item">Threat Detection</a>
+    <a href="incidents.html" class="nav-item">Incidents</a>
+    <a href="endpoints.html" class="nav-item active">Endpoint Security</a>
+    <a href="network.html" class="nav-item">Network Monitoring</a>
+    <a href="vulnerabilities.html" class="nav-item">Vulnerabilities</a>
+
+    <div class="section-title">Management</div>
+
+    <a href="reports.html" class="nav-item">Reports</a>
+    <a href="compliance.html" class="nav-item">Compliance</a>
+    <a href="settings.html" class="nav-item">Settings</a>
+
+</aside>
+
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div class="breadcrumb">
+            <a href="endpoints.html">Endpoint Security</a>
+            &nbsp; / &nbsp;
+            Endpoint Details
+        </div>
+
+        <div class="demo-badge">
+            <span class="demo-dot"></span>
+            DEMO ENVIRONMENT
+        </div>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <section class="page-header">
+
+        <div class="header-main">
+
+            <div class="header-title">
+
+                <div class="device-icon">
+                    💻
+                </div>
+
+                <div>
+                    <h1>Finance-WS-01</h1>
+                    <div class="subtitle">
+                        Endpoint ID: EP-10001
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="status-area">
+
+                <div class="status-badge">
+                    ● PROTECTED
+                </div>
+
+                <div class="last-seen">
+                    Last seen 2 minutes ago
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button class="btn btn-primary"
+                    onclick="showToast('Endpoint scan started — Demo action')">
+                Run Security Scan
+            </button>
+
+            <button class="btn btn-light"
+                    onclick="showToast('Endpoint isolation requested — Demo action')">
+                Isolate Endpoint
+            </button>
+
+            <button class="btn btn-light"
+                    onclick="showToast('Policy update requested — Demo action')">
+                Update Policy
+            </button>
+
+            <button class="btn btn-danger"
+                    onclick="showToast('Endpoint response action selected — Demo action')">
+                Response Actions
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="grid">
+
+        <!-- LEFT COLUMN -->
+
+        <div>
+
+            <!-- DEVICE INFORMATION -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Device Information
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <div class="info-label">Endpoint ID</div>
+                        <div class="info-value">EP-10001</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Device Name</div>
+                        <div class="info-value">Finance-WS-01</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Operating System</div>
+                        <div class="info-value">Windows 11 Pro</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">IP Address</div>
+                        <div class="info-value">10.20.4.21</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Assigned User</div>
+                        <div class="info-value">Finance User</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Department</div>
+                        <div class="info-value">Finance</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Location</div>
+                        <div class="info-value">Headquarters</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">Agent Version</div>
+                        <div class="info-value">ShieldX Agent 4.8.2</div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SECURITY ACTIVITY -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Security Activity
+                </div>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-time">
+                            2 minutes ago
+                        </div>
+
+                        <div class="timeline-title">
+                            Endpoint heartbeat received
+                        </div>
+
+                        <div class="timeline-text">
+                            Security agent successfully reported endpoint status.
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-time">
+                            18 minutes ago
+                        </div>
+
+                        <div class="timeline-title">
+                            Security policy verified
+                        </div>
+
+                        <div class="timeline-text">
+                            Endpoint configuration matched the assigned security policy.
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-time">
+                            42 minutes ago
+                        </div>
+
+                        <div class="timeline-title">
+                            Threat scan completed
+                        </div>
+
+                        <div class="timeline-text">
+                            Demo scan completed with no critical findings.
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-time">
+                            2 hours ago
+                        </div>
+
+                        <div class="timeline-title">
+                            Security intelligence updated
+                        </div>
+
+                        <div class="timeline-text">
+                            Demo endpoint protection definitions were updated.
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-time">
+                            Today, 08:15
+                        </div>
+
+                        <div class="timeline-title">
+                            Endpoint connected
+                        </div>
+
+                        <div class="timeline-text">
+                            Endpoint agent established a secure session.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SECURITY CONTROLS -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Security Controls
+                </div>
+
+                <div class="security-list">
+
+                    <div class="security-row">
+
+                        <div>
+                            <div class="security-name">
+                                Real-Time Protection
+                            </div>
+                            <div class="security-description">
+                                Continuous endpoint protection
+                            </div>
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div>
+                            <div class="security-name">
+                                Firewall Protection
+                            </div>
+                            <div class="security-description">
+                                Network traffic protection
+                            </div>
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div>
+                            <div class="security-name">
+                                Behavior Monitoring
+                            </div>
+                            <div class="security-description">
+                                Suspicious behavior monitoring
+                            </div>
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+
+                    <div class="security-row">
+
+                        <div>
+                            <div class="security-name">
+                                Automatic Updates
+                            </div>
+                            <div class="security-description">
+                                Security intelligence updates
+                            </div>
+                        </div>
+
+                        <div class="toggle"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- NOTES -->
+
+            <section class="card notes">
+
+                <div class="card-title">
+                    Endpoint Notes
+                </div>
+
+                <textarea
+                    id="notes"
+                    placeholder="Enter investigation or endpoint notes..."></textarea>
+
+                <div style="margin-top:12px;">
+                    <button class="btn btn-primary"
+                            onclick="saveNotes()">
+                        Save Notes
+                    </button>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <div>
+
+            <!-- RISK SCORE -->
+
+            <section class="card risk-card">
+
+                <div class="card-title">
+                    Endpoint Security Score
+                </div>
+
+                <div class="risk-circle">
+
+                    <div class="risk-number">
+                        88
+                    </div>
+
+                </div>
+
+                <div class="risk-label">
+                    Security Score
+                </div>
+
+                <div class="risk-status">
+                    GOOD
+                </div>
+
+            </section>
+
+
+            <!-- HEALTH -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Endpoint Health
+                </div>
+
+                <div class="progress-item">
+
+                    <div class="progress-header">
+                        <span>Protection</span>
+                        <span>98%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:98%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-header">
+                        <span>Policy Compliance</span>
+                        <span>96%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:96%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-header">
+                        <span>Patch Level</span>
+                        <span>91%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:91%;"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-header">
+                        <span>Agent Health</span>
+                        <span>100%</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width:100%;"></div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROTECTION MODULES -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Protection Modules
+                </div>
+
+                <div class="module-list">
+
+                    <div class="module">
+
+                        <span class="module-name">
+                            Malware Protection
+                        </span>
+
+                        <span class="module-status enabled">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="module">
+
+                        <span class="module-name">
+                            EDR Monitoring
+                        </span>
+
+                        <span class="module-status enabled">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="module">
+
+                        <span class="module-name">
+                            Web Protection
+                        </span>
+
+                        <span class="module-status enabled">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="module">
+
+                        <span class="module-name">
+                            Application Control
+                        </span>
+
+                        <span class="module-status enabled">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="module">
+
+                        <span class="module-name">
+                            Device Control
+                        </span>
+
+                        <span class="module-status warning">
+                            REVIEW
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PATCH STATUS -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Patch & Update Status
+                </div>
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        Security Updates
+                    </div>
+
+                    <div class="info-value">
+                        Up to date
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        Last Update
+                    </div>
+
+                    <div class="info-value">
+                        Today, 07:42
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="info-item">
+
+                    <div class="info-label">
+                        Pending Updates
+                    </div>
+
+                    <div class="info-value">
+                        2 non-critical
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RESPONSE -->
+
+            <section class="card">
+
+                <div class="card-title">
+                    Response Actions
+                </div>
+
+                <button class="btn btn-light"
+                        style="width:100%; margin-bottom:9px;"
+                        onclick="showToast('Full endpoint scan requested — Demo action')">
+                    🔍 Full Security Scan
+                </button>
+
+                <button class="btn btn-light"
+                        style="width:100%; margin-bottom:9px;"
+                        onclick="showToast('Network isolation requested — Demo action')">
+                    🔒 Network Isolation
+                </button>
+
+                <button class="btn btn-light"
+                        style="width:100%; margin-bottom:9px;"
+                        onclick="showToast('Endpoint policy refresh requested — Demo action')">
+                    ⚙ Refresh Security Policy
+                </button>
+
+                <button class="btn btn-light"
+                        style="width:100%;"
+                        onclick="showToast('Security report generated — Demo action')">
+                    📄 Generate Endpoint Report
+                </button>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-note">
+        ShieldX Cybersecurity Platform • Demo Environment • Sample data only
+    </div>
+
+</main>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function() {
+        toast.classList.remove("show");
+    }, 2800);
+
+}
+
+
+function saveNotes() {
+
+    const notes = document.getElementById("notes").value.trim();
+
+    if (notes === "") {
+
+        showToast("Please enter a note first.");
+
+        return;
+    }
+
+    showToast("Notes saved successfully — Demo action");
+
+}
+
+
+</script>
+
+</body>
+</html>
