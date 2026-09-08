@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Incident Details | ShieldX Cybersecurity</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#07111f;
+    color:#e8f0f7;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:245px;
+    height:100vh;
+    background:#0a1626;
+    border-right:1px solid #1c3045;
+    padding:24px 16px;
+    z-index:1000;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#42e6a4;
+    margin-bottom:8px;
+    padding-left:10px;
+}
+
+.logo span{
+    color:white;
+}
+
+.demo-small{
+    font-size:11px;
+    color:#8fa5b8;
+    padding-left:10px;
+    margin-bottom:30px;
+}
+
+.section-title{
+    font-size:11px;
+    color:#657b90;
+    text-transform:uppercase;
+    margin:20px 10px 10px;
+    letter-spacing:1px;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 13px;
+    margin-bottom:5px;
+    color:#a9b9c8;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav-link:hover{
+    background:#102337;
+    color:white;
+}
+
+.nav-link.active{
+    background:#123029;
+    color:#42e6a4;
+}
+
+.icon{
+    width:20px;
+    text-align:center;
+    font-size:16px;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
+}
+
+/* TOPBAR */
+
+.topbar{
+    height:70px;
+    background:#091522;
+    border-bottom:1px solid #1c3045;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.page-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.demo-badge{
+    border:1px solid #2c8062;
+    background:#0d2922;
+    color:#42e6a4;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.user{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#18314b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#42e6a4;
+    font-weight:bold;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+/* BREADCRUMB */
+
+.breadcrumb{
+    margin-bottom:22px;
+    font-size:12px;
+    color:#71879b;
+}
+
+.breadcrumb a{
+    color:#42e6a4;
+    text-decoration:none;
+}
+
+.breadcrumb span{
+    margin:0 8px;
+}
+
+/* HEADER */
+
+.incident-header{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.incident-id{
+    color:#42e6a4;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.incident-title{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.description{
+    color:#8297aa;
+    font-size:13px;
+    line-height:1.6;
+    max-width:800px;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:1px solid #29445a;
+    background:#102337;
+    color:#dbe7f0;
+    padding:10px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.btn:hover{
+    border-color:#42e6a4;
+    color:#42e6a4;
+}
+
+.btn-primary{
+    background:#123029;
+    border-color:#2c8062;
+    color:#42e6a4;
+}
+
+/* STATUS ROW */
+
+.status-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1px solid #1b3044;
+    flex-wrap:wrap;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.critical{
+    background:#3b171b;
+    color:#ff7272;
+    border:1px solid #703037;
+}
+
+.status{
+    background:#13283a;
+    color:#9db2c4;
+    border:1px solid #274056;
+}
+
+.status-investigating{
+    color:#f2c94c;
+    background:#392914;
+    border-color:#725325;
+}
+
+.status-item{
+    color:#72889b;
+    font-size:11px;
+}
+
+.status-item strong{
+    color:#d6e1e9;
+    font-size:12px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+/* PANELS */
+
+.panel{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.panel-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.panel-title h2{
+    font-size:17px;
+}
+
+.panel-title span{
+    color:#6f8498;
+    font-size:11px;
+}
+
+/* RISK */
+
+.risk-box{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.risk-circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border:7px solid #8d3339;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.risk-number{
+    font-size:27px;
+    font-weight:bold;
+}
+
+.risk-label{
+    font-size:9px;
+    color:#8196aa;
+}
+
+.risk-info h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.risk-info p{
+    color:#8094a7;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* DETAILS */
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.detail{
+    background:#081522;
+    border:1px solid #172d42;
+    border-radius:8px;
+    padding:15px;
+}
+
+.detail-label{
+    color:#6e8396;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.detail-value{
+    color:#dbe5ec;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.detail-value.green{
+    color:#42e6a4;
+}
+
+.detail-value.red{
+    color:#ff7272;
+}
+
+/* TIMELINE */
+
+.timeline{
+    position:relative;
+    padding-left:30px;
+}
+
+.timeline:before{
+    content:"";
+    position:absolute;
+    left:8px;
+    top:4px;
+    bottom:4px;
+    width:1px;
+    background:#284156;
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:-27px;
+    top:3px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#42e6a4;
+    box-shadow:0 0 0 4px #0b1929;
+}
+
+.timeline-dot.alert{
+    background:#ff7272;
+}
+
+.timeline-dot.warning{
+    background:#f2c94c;
+}
+
+.timeline-title{
+    font-size:13px;
+    font-weight:bold;
+    color:#dce7ee;
+    margin-bottom:5px;
+}
+
+.timeline-description{
+    color:#7f94a7;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.timeline-time{
+    color:#536b80;
+    font-size:10px;
+    margin-top:5px;
+}
+
+/* ASSETS */
+
+.asset{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #172d42;
+}
+
+.asset:last-child{
+    border-bottom:none;
+}
+
+.asset-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.asset-icon{
+    width:34px;
+    height:34px;
+    border-radius:7px;
+    background:#13283a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.asset-name{
+    font-size:12px;
+    color:#d8e3ea;
+}
+
+.asset-ip{
+    font-size:10px;
+    color:#60778b;
+    margin-top:4px;
+}
+
+.asset-status{
+    color:#42e6a4;
+    font-size:10px;
+}
+
+/* EVIDENCE */
+
+.evidence{
+    background:#07111f;
+    border:1px solid #172d42;
+    border-radius:8px;
+    padding:14px;
+    margin-bottom:10px;
+}
+
+.evidence-title{
+    font-size:12px;
+    color:#dce6ed;
+    margin-bottom:6px;
+}
+
+.evidence-text{
+    color:#71879b;
+    font-size:10px;
+    line-height:1.5;
+}
+
+/* RESPONSE */
+
+.response-item{
+    display:flex;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #172d42;
+}
+
+.response-item:last-child{
+    border-bottom:none;
+}
+
+.check{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#123029;
+    border:1px solid #286250;
+    color:#42e6a4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    flex-shrink:0;
+}
+
+.response-text{
+    font-size:12px;
+    color:#cbd7df;
+}
+
+.response-sub{
+    font-size:10px;
+    color:#667d91;
+    margin-top:4px;
+}
+
+/* NOTES */
+
+textarea{
+    width:100%;
+    min-height:110px;
+    background:#07111f;
+    color:#dce7ee;
+    border:1px solid #243b51;
+    border-radius:8px;
+    padding:12px;
+    resize:vertical;
+    outline:none;
+    font-size:12px;
+}
+
+textarea:focus{
+    border-color:#42e6a4;
+}
+
+.save-btn{
+    margin-top:10px;
+    width:100%;
+    padding:11px;
+    border-radius:7px;
+    border:1px solid #2c8062;
+    background:#123029;
+    color:#42e6a4;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.save-btn:hover{
+    background:#164036;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#102337;
+    border:1px solid #42e6a4;
+    color:white;
+    padding:14px 18px;
+    border-radius:8px;
+    font-size:13px;
+    display:none;
+    z-index:3000;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .logo{
+        font-size:17px;
+        padding-left:8px;
+    }
+
+    .demo-small,
+    .section-title,
+    .nav-link span:not(.icon){
+        display:none;
+    }
+
+    .nav-link{
+        justify-content:center;
+        padding:12px 5px;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:20px 15px;
+    }
+
+    .header-top{
+        flex-direction:column;
+    }
+
+    .incident-title{
+        font-size:23px;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+    .top-right .demo-badge{
+        display:none;
+    }
+
+    .page-title{
+        font-size:16px;
+    }
+
+    .risk-box{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Shield<span>X</span>
+    </div>
+
+    <div class="demo-small">
+        Cybersecurity Platform
+    </div>
+
+
+    <div class="section-title">
+        Security Operations
+    </div>
+
+
+    <a href="index.html" class="nav-link">
+        <span class="icon">▦</span>
+        <span>Dashboard</span>
+    </a>
+
+
+    <a href="threats.html" class="nav-link">
+        <span class="icon">⚠</span>
+        <span>Threat Detection</span>
+    </a>
+
+
+    <a href="incidents.html" class="nav-link active">
+        <span class="icon">🚨</span>
+        <span>Incidents</span>
+    </a>
+
+
+    <a href="endpoints.html" class="nav-link">
+        <span class="icon">▣</span>
+        <span>Endpoint Security</span>
+    </a>
+
+
+    <a href="network.html" class="nav-link">
+        <span class="icon">⌁</span>
+        <span>Network Monitoring</span>
+    </a>
+
+
+    <a href="vulnerabilities.html" class="nav-link">
+        <span class="icon">◈</span>
+        <span>Vulnerabilities</span>
+    </a>
+
+
+    <div class="section-title">
+        Management
+    </div>
+
+
+    <a href="reports.html" class="nav-link">
+        <span class="icon">▤</span>
+        <span>Reports</span>
+    </a>
+
+
+    <a href="compliance.html" class="nav-link">
+        <span class="icon">✓</span>
+        <span>Compliance</span>
+    </a>
+
+
+    <a href="settings.html" class="nav-link">
+        <span class="icon">⚙</span>
+        <span>Settings</span>
+    </a>
+
+</aside>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <div class="page-title">
+        Incident Details
+    </div>
+
+
+    <div class="top-right">
+
+        <div class="demo-badge">
+            DEMO ENVIRONMENT
+        </div>
+
+        <div class="user">
+            SX
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<section class="content">
+
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb">
+
+    <a href="incidents.html">
+        Incidents
+    </a>
+
+    <span>›</span>
+
+    Incident INC-20481
+
+</div>
+
+
+
+<!-- INCIDENT HEADER -->
+
+<div class="incident-header">
+
+
+<div class="header-top">
+
+
+<div>
+
+    <div class="incident-id">
+        INCIDENT INC-20481
+    </div>
+
+    <h1 class="incident-title">
+        Unauthorized Access Attempt
+    </h1>
+
+    <p class="description">
+        Suspicious authentication activity detected involving a privileged
+        account. Multiple login attempts were observed from an unusual
+        location and require security investigation.
+    </p>
+
+</div>
+
+
+
+<div class="header-actions">
+
+    <button class="btn" onclick="showToast('Incident assigned — Demo action')">
+        Assign
+    </button>
+
+    <button class="btn" onclick="showToast('Incident escalation started — Demo action')">
+        Escalate
+    </button>
+
+    <button class="btn-primary btn" onclick="showToast('Incident containment initiated — Demo action')">
+        Contain Incident
+    </button>
+
+</div>
+
+
+</div>
+
+
+
+<div class="status-row">
+
+
+<span class="badge critical">
+    CRITICAL
+</span>
+
+
+<span class="badge status-investigating">
+    INVESTIGATING
+</span>
+
+
+<div class="status-item">
+    Detected:
+    <strong>8 minutes ago</strong>
+</div>
+
+
+<div class="status-item">
+    Source:
+    <strong>Authentication</strong>
+</div>
+
+
+<div class="status-item">
+    Assigned:
+    <strong>Security Team</strong>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- MAIN GRID -->
+
+<div class="grid">
+
+
+<!-- LEFT COLUMN -->
+
+<div>
+
+
+<!-- RISK PANEL -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Risk Assessment</h2>
+
+    <span>Demo analysis</span>
+
+</div>
+
+
+<div class="risk-box">
+
+
+<div class="risk-circle">
+
+    <div class="risk-number">
+        92
+    </div>
+
+    <div class="risk-label">
+        RISK SCORE
+    </div>
+
+</div>
+
+
+<div class="risk-info">
+
+    <h3>Critical Risk</h3>
+
+    <p>
+        This demo incident is categorized as high-impact because
+        the activity involves a privileged identity and repeated
+        authentication attempts.
+    </p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- INCIDENT DETAILS -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Incident Information</h2>
+
+    <span>INC-20481</span>
+
+</div>
+
+
+<div class="detail-grid">
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Incident Type
+    </div>
+
+    <div class="detail-value">
+        Unauthorized Access
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Detection Source
+    </div>
+
+    <div class="detail-value">
+        Identity Monitoring
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Affected Account
+    </div>
+
+    <div class="detail-value">
+        admin-demo
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Severity
+    </div>
+
+    <div class="detail-value red">
+        Critical
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Current Status
+    </div>
+
+    <div class="detail-value">
+        Investigating
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Detection Time
+    </div>
+
+    <div class="detail-value">
+        08:42 UTC
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Source Region
+    </div>
+
+    <div class="detail-value">
+        Unknown Region
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Events Correlated
+    </div>
+
+    <div class="detail-value green">
+        147 Events
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- TIMELINE -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Investigation Timeline</h2>
+
+    <span>Live Demo Timeline</span>
+
+</div>
+
+
+<div class="timeline">
+
+
+<div class="timeline-item">
+
+    <div class="timeline-dot alert"></div>
+
+    <div class="timeline-title">
+        Suspicious authentication activity detected
+    </div>
+
+    <div class="timeline-description">
+        Multiple authentication attempts were correlated
+        with an unusual access pattern.
+    </div>
+
+    <div class="timeline-time">
+        08:42 UTC · 8 minutes ago
+    </div>
+
+</div>
+
+
+
+<div class="timeline-item">
+
+    <div class="timeline-dot warning"></div>
+
+    <div class="timeline-title">
+        Incident automatically classified
+    </div>
+
+    <div class="timeline-description">
+        Demo risk engine classified the event as Critical
+        based on account privilege and activity pattern.
+    </div>
+
+    <div class="timeline-time">
+        08:43 UTC · 7 minutes ago
+    </div>
+
+</div>
+
+
+
+<div class="timeline-item">
+
+    <div class="timeline-dot"></div>
+
+    <div class="timeline-title">
+        Security team notified
+    </div>
+
+    <div class="timeline-description">
+        The security operations team was assigned to review
+        the incident.
+    </div>
+
+    <div class="timeline-time">
+        08:44 UTC · 6 minutes ago
+    </div>
+
+</div>
+
+
+
+<div class="timeline-item">
+
+    <div class="timeline-dot"></div>
+
+    <div class="timeline-title">
+        Investigation started
+    </div>
+
+    <div class="timeline-description">
+        Initial investigation and evidence review started.
+    </div>
+
+    <div class="timeline-time">
+        08:46 UTC · 4 minutes ago
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- EVIDENCE -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Evidence</h2>
+
+    <span>Sample Data</span>
+
+</div>
+
+
+<div class="evidence">
+
+    <div class="evidence-title">
+        Authentication Pattern
+    </div>
+
+    <div class="evidence-text">
+        27 failed authentication attempts followed by
+        a successful login event in the demo dataset.
+    </div>
+
+</div>
+
+
+<div class="evidence">
+
+    <div class="evidence-title">
+        Account Privilege
+    </div>
+
+    <div class="evidence-text">
+        Account is marked as privileged within the simulated
+        enterprise environment.
+    </div>
+
+</div>
+
+
+<div class="evidence">
+
+    <div class="evidence-title">
+        Access Pattern
+    </div>
+
+    <div class="evidence-text">
+        Activity differs from the account's simulated
+        historical access pattern.
+    </div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- RIGHT COLUMN -->
+
+<div>
+
+
+<!-- ASSIGNED TEAM -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Response Team</h2>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Lead Analyst
+    </div>
+
+    <div class="detail-value">
+        Alex Morgan
+    </div>
+
+</div>
+
+
+<br>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Team
+    </div>
+
+    <div class="detail-value">
+        Security Operations Center
+    </div>
+
+</div>
+
+
+<br>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        Response SLA
+    </div>
+
+    <div class="detail-value green">
+        12 Minutes
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- AFFECTED ASSETS -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Affected Assets</h2>
+
+    <span>3 Assets</span>
+
+</div>
+
+
+<div class="asset">
+
+<div class="asset-left">
+
+    <div class="asset-icon">
+        🖥️
+    </div>
+
+    <div>
+
+        <div class="asset-name">
+            Admin Workstation
+        </div>
+
+        <div class="asset-ip">
+            10.20.4.18
+        </div>
+
+    </div>
+
+</div>
+
+<div class="asset-status">
+    Monitored
+</div>
+
+</div>
+
+
+
+<div class="asset">
+
+<div class="asset-left">
+
+    <div class="asset-icon">
+        🗄️
+    </div>
+
+    <div>
+
+        <div class="asset-name">
+            Identity Server
+        </div>
+
+        <div class="asset-ip">
+            10.20.1.10
+        </div>
+
+    </div>
+
+</div>
+
+<div class="asset-status">
+    Protected
+</div>
+
+</div>
+
+
+
+<div class="asset">
+
+<div class="asset-left">
+
+    <div class="asset-icon">
+        🌐
+    </div>
+
+    <div>
+
+        <div class="asset-name">
+            Secure Gateway
+        </div>
+
+        <div class="asset-ip">
+            10.20.0.1
+        </div>
+
+    </div>
+
+</div>
+
+<div class="asset-status">
+    Protected
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- RESPONSE ACTIONS -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Response Actions</h2>
+
+</div>
+
+
+<div class="response-item">
+
+    <div class="check">
+        ✓
+    </div>
+
+    <div>
+
+        <div class="response-text">
+            Security team notified
+        </div>
+
+        <div class="response-sub">
+            Completed
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="response-item">
+
+    <div class="check">
+        ✓
+    </div>
+
+    <div>
+
+        <div class="response-text">
+            Authentication events reviewed
+        </div>
+
+        <div class="response-sub">
+            Completed
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="response-item">
+
+    <div class="check">
+        ✓
+    </div>
+
+    <div>
+
+        <div class="response-text">
+            Affected assets identified
+        </div>
+
+        <div class="response-sub">
+            Completed
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="response-item">
+
+    <div class="check">
+        →
+    </div>
+
+    <div>
+
+        <div class="response-text">
+            Containment decision
+        </div>
+
+        <div class="response-sub">
+            Pending analyst approval
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- NOTES -->
+
+<div class="panel">
+
+<div class="panel-title">
+
+    <h2>Investigation Notes</h2>
+
+</div>
+
+
+<textarea
+id="notes"
+placeholder="Enter investigation notes..."
+></textarea>
+
+
+<button
+class="save-btn"
+onclick="saveNotes()"
+>
+Save Notes
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText =
+        message;
+
+    toast.style.display =
+        "block";
+
+    setTimeout(function(){
+
+        toast.style.display =
+            "none";
+
+    },3000);
+
+}
+
+
+
+function saveNotes(){
+
+    const notes =
+        document.getElementById("notes").value;
+
+    if(notes.trim()===""){
+
+        showToast(
+            "Please enter a note first."
+        );
+
+        return;
+    }
+
+    showToast(
+        "Investigation notes saved — Demo action."
+    );
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
