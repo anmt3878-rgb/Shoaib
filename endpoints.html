@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Endpoint Security | ShieldX</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#07111f;
+    color:#e8f0f7;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:245px;
+    height:100vh;
+    background:#0a1626;
+    border-right:1px solid #1c3045;
+    padding:24px 16px;
+    z-index:1000;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#42e6a4;
+    margin-bottom:8px;
+    padding-left:10px;
+}
+
+.logo span{
+    color:#fff;
+}
+
+.demo-small{
+    font-size:11px;
+    color:#8fa5b8;
+    padding-left:10px;
+    margin-bottom:30px;
+}
+
+.section-title{
+    font-size:11px;
+    color:#657b90;
+    text-transform:uppercase;
+    margin:20px 10px 10px;
+    letter-spacing:1px;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 13px;
+    margin-bottom:5px;
+    color:#a9b9c8;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav-link:hover{
+    background:#102337;
+    color:#fff;
+}
+
+.nav-link.active{
+    background:#123029;
+    color:#42e6a4;
+}
+
+.icon{
+    width:20px;
+    text-align:center;
+    font-size:16px;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
+}
+
+/* TOPBAR */
+
+.topbar{
+    height:70px;
+    background:#091522;
+    border-bottom:1px solid #1c3045;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.page-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.demo-badge{
+    border:1px solid #2c8062;
+    background:#0d2922;
+    color:#42e6a4;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.user{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#18314b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#42e6a4;
+    font-weight:bold;
+}
+
+/* CONTENT */
+
+.content{
+    padding:30px;
+}
+
+.intro{
+    margin-bottom:25px;
+}
+
+.intro h1{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.intro p{
+    color:#8196aa;
+    font-size:14px;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    padding:20px;
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.card-title{
+    color:#8ca0b3;
+    font-size:13px;
+}
+
+.card-icon{
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    background:#13283a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.card-number{
+    font-size:29px;
+    font-weight:bold;
+}
+
+.card-change{
+    margin-top:8px;
+    font-size:12px;
+    color:#42e6a4;
+}
+
+.card-change.warning{
+    color:#f2c94c;
+}
+
+.card-change.danger{
+    color:#ff6b6b;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:18px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+    background:#07111f;
+    border:1px solid #243b51;
+    color:white;
+    padding:11px 14px;
+    border-radius:7px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#42e6a4;
+}
+
+select{
+    background:#07111f;
+    color:#dbe7f0;
+    border:1px solid #243b51;
+    padding:11px 14px;
+    border-radius:7px;
+    outline:none;
+}
+
+select:focus{
+    border-color:#42e6a4;
+}
+
+/* TABLE */
+
+.table-container{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    overflow-x:auto;
+}
+
+.table-header{
+    padding:20px;
+    border-bottom:1px solid #1b3044;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.table-header h2{
+    font-size:17px;
+}
+
+.table-header span{
+    color:#71879b;
+    font-size:12px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th{
+    text-align:left;
+    color:#6f8498;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    padding:14px 18px;
+    border-bottom:1px solid #1b3044;
+}
+
+td{
+    padding:17px 18px;
+    border-bottom:1px solid #14283b;
+    font-size:13px;
+    color:#c7d3dd;
+}
+
+tr:hover{
+    background:#0e2033;
+}
+
+.device-name{
+    color:#fff;
+    font-weight:bold;
+}
+
+.device-id{
+    color:#42e6a4;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.subtext{
+    display:block;
+    color:#6f8498;
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* STATUS BADGES */
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.healthy{
+    background:#123029;
+    color:#42e6a4;
+    border:1px solid #286250;
+}
+
+.risk{
+    background:#392914;
+    color:#f5b84b;
+    border:1px solid #725325;
+}
+
+.critical{
+    background:#3b171b;
+    color:#ff7272;
+    border:1px solid #703037;
+}
+
+.offline{
+    background:#202b36;
+    color:#9aa9b5;
+    border:1px solid #3a4a57;
+}
+
+/* RISK SCORE */
+
+.score{
+    font-weight:bold;
+}
+
+.score.good{
+    color:#42e6a4;
+}
+
+.score.medium{
+    color:#f2c94c;
+}
+
+.score.bad{
+    color:#ff7272;
+}
+
+/* BUTTON */
+
+.view-btn{
+    background:transparent;
+    border:1px solid #2c506a;
+    color:#7eddb6;
+    padding:7px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:11px;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.view-btn:hover{
+    background:#123029;
+    border-color:#42e6a4;
+}
+
+/* BOTTOM */
+
+.bottom-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:20px;
+}
+
+.panel{
+    background:#0b1929;
+    border:1px solid #1b3044;
+    border-radius:12px;
+    padding:20px;
+}
+
+.panel h3{
+    font-size:16px;
+    margin-bottom:18px;
+}
+
+.health-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.health-label{
+    width:110px;
+    color:#8ca0b3;
+    font-size:12px;
+}
+
+.progress{
+    flex:1;
+    height:8px;
+    background:#15283a;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:#42e6a4;
+    border-radius:20px;
+}
+
+.health-number{
+    width:45px;
+    text-align:right;
+    font-size:11px;
+    color:#cbd7df;
+}
+
+/* ACTIVITY */
+
+.activity{
+    display:flex;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #172d42;
+}
+
+.activity:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:32px;
+    height:32px;
+    border-radius:7px;
+    background:#13283a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.activity-text{
+    font-size:12px;
+    color:#cbd7df;
+}
+
+.activity-time{
+    font-size:10px;
+    color:#667d91;
+    margin-top:4px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#102337;
+    border:1px solid #42e6a4;
+    color:#fff;
+    padding:14px 18px;
+    border-radius:8px;
+    font-size:13px;
+    display:none;
+    z-index:3000;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .logo{
+        font-size:17px;
+        padding-left:8px;
+    }
+
+    .demo-small,
+    .section-title,
+    .nav-link span:not(.icon){
+        display:none;
+    }
+
+    .nav-link{
+        justify-content:center;
+        padding:12px 5px;
+    }
+
+    .main{
+        margin-left:70px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:20px 15px;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .bottom-grid{
+        grid-template-columns:1fr;
+    }
+
+    .demo-badge{
+        display:none;
+    }
+
+    .page-title{
+        font-size:17px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Shield<span>X</span>
+    </div>
+
+    <div class="demo-small">
+        Cybersecurity Platform
+    </div>
+
+
+    <div class="section-title">
+        Security Operations
+    </div>
+
+
+    <a href="index.html" class="nav-link">
+        <span class="icon">▦</span>
+        <span>Dashboard</span>
+    </a>
+
+
+    <a href="threats.html" class="nav-link">
+        <span class="icon">⚠</span>
+        <span>Threat Detection</span>
+    </a>
+
+
+    <a href="incidents.html" class="nav-link">
+        <span class="icon">🚨</span>
+        <span>Incidents</span>
+    </a>
+
+
+    <a href="endpoints.html" class="nav-link active">
+        <span class="icon">▣</span>
+        <span>Endpoint Security</span>
+    </a>
+
+
+    <a href="network.html" class="nav-link">
+        <span class="icon">⌁</span>
+        <span>Network Monitoring</span>
+    </a>
+
+
+    <a href="vulnerabilities.html" class="nav-link">
+        <span class="icon">◈</span>
+        <span>Vulnerabilities</span>
+    </a>
+
+
+    <div class="section-title">
+        Management
+    </div>
+
+
+    <a href="reports.html" class="nav-link">
+        <span class="icon">▤</span>
+        <span>Reports</span>
+    </a>
+
+
+    <a href="compliance.html" class="nav-link">
+        <span class="icon">✓</span>
+        <span>Compliance</span>
+    </a>
+
+
+    <a href="settings.html" class="nav-link">
+        <span class="icon">⚙</span>
+        <span>Settings</span>
+    </a>
+
+</aside>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <div class="page-title">
+        Endpoint Security
+    </div>
+
+
+    <div class="top-right">
+
+        <div class="demo-badge">
+            DEMO ENVIRONMENT
+        </div>
+
+        <div class="user">
+            SX
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<section class="content">
+
+
+<div class="intro">
+
+    <h1>Endpoint Security</h1>
+
+    <p>
+        Monitor endpoint health, protection status, and security risk across the organization.
+    </p>
+
+</div>
+
+
+
+<!-- SUMMARY CARDS -->
+
+<div class="cards">
+
+
+<div class="card">
+
+    <div class="card-top">
+
+        <div class="card-title">
+            Protected Endpoints
+        </div>
+
+        <div class="card-icon">
+            🛡️
+        </div>
+
+    </div>
+
+    <div class="card-number">
+        1,248
+    </div>
+
+    <div class="card-change">
+        ▲ 3.2% this month
+    </div>
+
+</div>
+
+
+
+<div class="card">
+
+    <div class="card-top">
+
+        <div class="card-title">
+            Healthy
+        </div>
+
+        <div class="card-icon">
+            ✓
+        </div>
+
+    </div>
+
+    <div class="card-number">
+        1,231
+    </div>
+
+    <div class="card-change">
+        98.6% protected
+    </div>
+
+</div>
+
+
+
+<div class="card">
+
+    <div class="card-top">
+
+        <div class="card-title">
+            At Risk
+        </div>
+
+        <div class="card-icon">
+            ⚠
+        </div>
+
+    </div>
+
+    <div class="card-number">
+        14
+    </div>
+
+    <div class="card-change warning">
+        Requires attention
+    </div>
+
+</div>
+
+
+
+<div class="card">
+
+    <div class="card-top">
+
+        <div class="card-title">
+            Critical
+        </div>
+
+        <div class="card-icon">
+            🔴
+        </div>
+
+    </div>
+
+    <div class="card-number">
+        3
+    </div>
+
+    <div class="card-change danger">
+        Immediate review
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- TOOLBAR -->
+
+<div class="toolbar">
+
+
+<input
+    type="text"
+    id="searchInput"
+    class="search"
+    placeholder="Search devices, users, IP addresses..."
+>
+
+
+<select id="statusFilter">
+
+    <option value="all">
+        All Status
+    </option>
+
+    <option value="healthy">
+        Healthy
+    </option>
+
+    <option value="risk">
+        At Risk
+    </option>
+
+    <option value="critical">
+        Critical
+    </option>
+
+    <option value="offline">
+        Offline
+    </option>
+
+</select>
+
+
+<select id="osFilter">
+
+    <option value="all">
+        All Operating Systems
+    </option>
+
+    <option value="windows">
+        Windows
+    </option>
+
+    <option value="macos">
+        macOS
+    </option>
+
+    <option value="linux">
+        Linux
+    </option>
+
+</select>
+
+
+</div>
+
+
+
+<!-- ENDPOINT TABLE -->
+
+<div class="table-container">
+
+
+<div class="table-header">
+
+    <h2>Protected Endpoints</h2>
+
+    <span id="resultCount">
+        8 endpoints
+    </span>
+
+</div>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+    <th>Device</th>
+    <th>Operating System</th>
+    <th>IP Address</th>
+    <th>Risk Score</th>
+    <th>Last Seen</th>
+    <th>Status</th>
+    <th>Action</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="endpointTable">
+
+
+<tr
+data-status="healthy"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10001
+    </div>
+
+    <div class="device-name">
+        Finance-WS-01
+    </div>
+
+    <span class="subtext">
+        Finance Department
+    </span>
+
+</td>
+
+<td>
+    Windows 11
+</td>
+
+<td>
+    10.20.4.21
+</td>
+
+<td>
+    <span class="score good">
+        12/100
+    </span>
+</td>
+
+<td>
+    2 min ago
+</td>
+
+<td>
+
+    <span class="badge healthy">
+        HEALTHY
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10001')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="healthy"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10002
+    </div>
+
+    <div class="device-name">
+        Executive-LT-02
+    </div>
+
+    <span class="subtext">
+        Executive Office
+    </span>
+
+</td>
+
+<td>
+    Windows 11
+</td>
+
+<td>
+    10.20.5.14
+</td>
+
+<td>
+    <span class="score good">
+        8/100
+    </span>
+</td>
+
+<td>
+    4 min ago
+</td>
+
+<td>
+
+    <span class="badge healthy">
+        HEALTHY
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10002')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="risk"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10003
+    </div>
+
+    <div class="device-name">
+        Sales-WS-17
+    </div>
+
+    <span class="subtext">
+        Sales Department
+    </span>
+
+</td>
+
+<td>
+    Windows 10
+</td>
+
+<td>
+    10.20.8.33
+</td>
+
+<td>
+    <span class="score medium">
+        48/100
+    </span>
+</td>
+
+<td>
+    9 min ago
+</td>
+
+<td>
+
+    <span class="badge risk">
+        AT RISK
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10003')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="critical"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10004
+    </div>
+
+    <div class="device-name">
+        Admin-WS-01
+    </div>
+
+    <span class="subtext">
+        IT Administration
+    </span>
+
+</td>
+
+<td>
+    Windows 11
+</td>
+
+<td>
+    10.20.1.18
+</td>
+
+<td>
+    <span class="score bad">
+        91/100
+    </span>
+
+</td>
+
+<td>
+    12 min ago
+</td>
+
+<td>
+
+    <span class="badge critical">
+        CRITICAL
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10004')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="healthy"
+data-os="macos"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10005
+    </div>
+
+    <div class="device-name">
+        Design-Mac-04
+    </div>
+
+    <span class="subtext">
+        Design Department
+    </span>
+
+</td>
+
+<td>
+    macOS
+</td>
+
+<td>
+    10.20.7.42
+</td>
+
+<td>
+    <span class="score good">
+        15/100
+    </span>
+
+</td>
+
+<td>
+    16 min ago
+</td>
+
+<td>
+
+    <span class="badge healthy">
+        HEALTHY
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10005')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="risk"
+data-os="linux"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10006
+    </div>
+
+    <div class="device-name">
+        Dev-Server-02
+    </div>
+
+    <span class="subtext">
+        Engineering
+    </span>
+
+</td>
+
+<td>
+    Linux
+</td>
+
+<td>
+    10.20.2.50
+</td>
+
+<td>
+    <span class="score medium">
+        55/100
+    </span>
+
+</td>
+
+<td>
+    22 min ago
+</td>
+
+<td>
+
+    <span class="badge risk">
+        AT RISK
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10006')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="healthy"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10007
+    </div>
+
+    <div class="device-name">
+        HR-LT-09
+    </div>
+
+    <span class="subtext">
+        Human Resources
+    </span>
+
+</td>
+
+<td>
+    Windows 11
+</td>
+
+<td>
+    10.20.6.27
+</td>
+
+<td>
+    <span class="score good">
+        11/100
+    </span>
+
+</td>
+
+<td>
+    28 min ago
+</td>
+
+<td>
+
+    <span class="badge healthy">
+        HEALTHY
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10007')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-status="offline"
+data-os="windows"
+>
+
+<td>
+
+    <div class="device-id">
+        EP-10008
+    </div>
+
+    <div class="device-name">
+        Warehouse-PC-03
+    </div>
+
+    <span class="subtext">
+        Operations
+    </span>
+
+</td>
+
+<td>
+    Windows 10
+</td>
+
+<td>
+    10.20.9.15
+</td>
+
+<td>
+    <span class="score medium">
+        38/100
+    </span>
+
+</td>
+
+<td>
+    2 hours ago
+</td>
+
+<td>
+
+    <span class="badge offline">
+        OFFLINE
+    </span>
+
+</td>
+
+<td>
+
+    <button
+    class="view-btn"
+    onclick="viewEndpoint('EP-10008')"
+    >
+        View
+    </button>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- BOTTOM GRID -->
+
+<div class="bottom-grid">
+
+
+<!-- HEALTH -->
+
+<div class="panel">
+
+    <h3>
+        Endpoint Health
+    </h3>
+
+
+    <div class="health-row">
+
+        <div class="health-label">
+            Protected
+        </div>
+
+        <div class="progress">
+
+            <div
+            class="progress-bar"
+            style="width:98.6%"
+            ></div>
+
+        </div>
+
+        <div class="health-number">
+            98.6%
+        </div>
+
+    </div>
+
+
+
+    <div class="health-row">
+
+        <div class="health-label">
+            At Risk
+        </div>
+
+        <div class="progress">
+
+            <div
+            class="progress-bar"
+            style="width:12%"
+            ></div>
+
+        </div>
+
+        <div class="health-number">
+            1.1%
+        </div>
+
+    </div>
+
+
+
+    <div class="health-row">
+
+        <div class="health-label">
+            Critical
+        </div>
+
+        <div class="progress">
+
+            <div
+            class="progress-bar"
+            style="width:3%"
+            ></div>
+
+        </div>
+
+        <div class="health-number">
+            0.2%
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ACTIVITY -->
+
+<div class="panel">
+
+    <h3>
+        Endpoint Activity
+    </h3>
+
+
+    <div class="activity">
+
+        <div class="activity-icon">
+            🛡️
+        </div>
+
+        <div>
+
+            <div class="activity-text">
+                Endpoint protection status updated.
+            </div>
+
+            <div class="activity-time">
+                3 minutes ago
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="activity">
+
+        <div class="activity-icon">
+            ⚠️
+        </div>
+
+        <div>
+
+            <div class="activity-text">
+                Sales-WS-17 moved to At Risk.
+            </div>
+
+            <div class="activity-time">
+                9 minutes ago
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="activity">
+
+        <div class="activity-icon">
+            🔴
+        </div>
+
+        <div>
+
+            <div class="activity-text">
+                Admin-WS-01 requires immediate review.
+            </div>
+
+            <div class="activity-time">
+                12 minutes ago
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+
+<script>
+
+/* SEARCH + FILTER */
+
+const searchInput =
+document.getElementById("searchInput");
+
+const statusFilter =
+document.getElementById("statusFilter");
+
+const osFilter =
+document.getElementById("osFilter");
+
+const rows =
+document.querySelectorAll("#endpointTable tr");
+
+const resultCount =
+document.getElementById("resultCount");
+
+
+function filterEndpoints(){
+
+    const search =
+    searchInput.value.toLowerCase();
+
+    const status =
+    statusFilter.value;
+
+    const os =
+    osFilter.value;
+
+    let visible = 0;
+
+
+    rows.forEach(row => {
+
+        const text =
+        row.innerText.toLowerCase();
+
+        const rowStatus =
+        row.dataset.status;
+
+        const rowOS =
+        row.dataset.os;
+
+
+        const matchesSearch =
+        text.includes(search);
+
+
+        const matchesStatus =
+        status === "all" ||
+        rowStatus === status;
+
+
+        const matchesOS =
+        os === "all" ||
+        rowOS === os;
+
+
+        if(
+            matchesSearch &&
+            matchesStatus &&
+            matchesOS
+        ){
+
+            row.style.display="";
+            visible++;
+
+        }else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+
+    resultCount.innerText =
+    visible + " endpoints";
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    filterEndpoints
+);
+
+
+statusFilter.addEventListener(
+    "change",
+    filterEndpoints
+);
+
+
+osFilter.addEventListener(
+    "change",
+    filterEndpoints
+);
+
+
+/* VIEW ENDPOINT */
+
+function viewEndpoint(id){
+
+    showToast(
+        "Endpoint " +
+        id +
+        " selected — Demo details coming next."
+    );
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.innerText =
+    message;
+
+    toast.style.display =
+    "block";
+
+
+    setTimeout(function(){
+
+        toast.style.display =
+        "none";
+
+    },3000);
+
+}
+
+</script>
+
+
+</body>
+</html>
