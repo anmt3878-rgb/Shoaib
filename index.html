@@ -6,6 +6,15 @@
 
     <title>ShieldX | Enterprise Cybersecurity Platform</title>
 
+    <!-- =========================
+         SHIELDX DEMO LOGIN PROTECTION
+    ========================== -->
+    <script>
+        if (localStorage.getItem("shieldxDemoLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -705,7 +714,7 @@
 
         /* =========================
            TOAST
-        ========================= */
+        ========================== */
 
         .toast {
             position: fixed;
