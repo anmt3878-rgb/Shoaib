@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incidents | ShieldX Cybersecurity</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #07111f;
+    color: #e8f0f7;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 245px;
+    height: 100vh;
+    background: #0a1626;
+    border-right: 1px solid #1c3045;
+    padding: 24px 16px;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #42e6a4;
+    margin-bottom: 8px;
+    padding-left: 10px;
+}
+
+.logo span {
+    color: #ffffff;
+}
+
+.demo-small {
+    font-size: 11px;
+    color: #8fa5b8;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 11px;
+    color: #657b90;
+    text-transform: uppercase;
+    margin: 20px 10px 10px;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 13px;
+    margin-bottom: 5px;
+    color: #a9b9c8;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background: #102337;
+    color: #ffffff;
+}
+
+.nav-link.active {
+    background: #123029;
+    color: #42e6a4;
+}
+
+.icon {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Main */
+.main {
+    margin-left: 245px;
+    min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+    height: 70px;
+    background: #091522;
+    border-bottom: 1px solid #1c3045;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.page-title {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.demo-badge {
+    border: 1px solid #2c8062;
+    background: #0d2922;
+    color: #42e6a4;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.user {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #18314b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #42e6a4;
+    font-weight: bold;
+}
+
+/* Content */
+.content {
+    padding: 30px;
+}
+
+.intro {
+    margin-bottom: 25px;
+}
+
+.intro h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.intro p {
+    color: #8196aa;
+    font-size: 14px;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #0b1929;
+    border: 1px solid #1b3044;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.card-title {
+    color: #8ca0b3;
+    font-size: 13px;
+}
+
+.card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #13283a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-number {
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.card-change {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #42e6a4;
+}
+
+.card-change.warning {
+    color: #f2c94c;
+}
+
+.card-change.danger {
+    color: #ff6b6b;
+}
+
+/* Toolbar */
+.toolbar {
+    background: #0b1929;
+    border: 1px solid #1b3044;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.search {
+    flex: 1;
+    min-width: 220px;
+    background: #07111f;
+    border: 1px solid #243b51;
+    color: white;
+    padding: 11px 14px;
+    border-radius: 7px;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #42e6a4;
+}
+
+select {
+    background: #07111f;
+    color: #dbe7f0;
+    border: 1px solid #243b51;
+    padding: 11px 14px;
+    border-radius: 7px;
+    outline: none;
+}
+
+select:focus {
+    border-color: #42e6a4;
+}
+
+/* Table */
+.table-container {
+    background: #0b1929;
+    border: 1px solid #1b3044;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.table-header {
+    padding: 20px;
+    border-bottom: 1px solid #1b3044;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-header h2 {
+    font-size: 17px;
+}
+
+.table-header span {
+    color: #71879b;
+    font-size: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th {
+    text-align: left;
+    color: #6f8498;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #1b3044;
+}
+
+td {
+    padding: 17px 18px;
+    border-bottom: 1px solid #14283b;
+    font-size: 13px;
+    color: #c7d3dd;
+}
+
+tr:hover {
+    background: #0e2033;
+}
+
+.incident-id {
+    color: #42e6a4;
+    font-weight: bold;
+}
+
+.incident-name {
+    color: white;
+    font-weight: bold;
+}
+
+.subtext {
+    display: block;
+    color: #6f8498;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.critical {
+    background: #3b171b;
+    color: #ff7272;
+    border: 1px solid #703037;
+}
+
+.high {
+    background: #392914;
+    color: #f5b84b;
+    border: 1px solid #725325;
+}
+
+.medium {
+    background: #332d14;
+    color: #e8d15a;
+    border: 1px solid #665c25;
+}
+
+.low {
+    background: #12302a;
+    color: #42e6a4;
+    border: 1px solid #286250;
+}
+
+.status {
+    background: #13283a;
+    color: #9db2c4;
+    border: 1px solid #274056;
+}
+
+/* Buttons */
+.view-btn {
+    background: transparent;
+    border: 1px solid #2c506a;
+    color: #7eddb6;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.view-btn:hover {
+    background: #123029;
+    border-color: #42e6a4;
+}
+
+/* Bottom */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.panel {
+    background: #0b1929;
+    border: 1px solid #1b3044;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.panel h3 {
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 13px;
+    margin-bottom: 18px;
+}
+
+.timeline-dot {
+    width: 10px;
+    height: 10px;
+    background: #42e6a4;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.timeline-text {
+    font-size: 12px;
+    color: #c2ced8;
+}
+
+.timeline-time {
+    font-size: 10px;
+    color: #667d91;
+    margin-top: 5px;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #102337;
+    border: 1px solid #42e6a4;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: none;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 70px;
+        padding: 20px 8px;
+    }
+
+    .logo {
+        font-size: 17px;
+        padding-left: 8px;
+    }
+
+    .demo-small,
+    .section-title,
+    .nav-link span:not(.icon) {
+        display: none;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 12px 5px;
+    }
+
+    .main {
+        margin-left: 70px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .content {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-title {
+        font-size: 17px;
+    }
+
+    .demo-badge {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        Shield<span>X</span>
+    </div>
+
+    <div class="demo-small">
+        Cybersecurity Platform
+    </div>
+
+    <div class="section-title">
+        Security Operations
+    </div>
+
+    <a href="index.html" class="nav-link">
+        <span class="icon">▦</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="threats.html" class="nav-link">
+        <span class="icon">⚠</span>
+        <span>Threat Detection</span>
+    </a>
+
+    <a href="incidents.html" class="nav-link active">
+        <span class="icon">🚨</span>
+        <span>Incidents</span>
+    </a>
+
+    <a href="endpoints.html" class="nav-link">
+        <span class="icon">▣</span>
+        <span>Endpoint Security</span>
+    </a>
+
+    <a href="network.html" class="nav-link">
+        <span class="icon">⌁</span>
+        <span>Network Monitoring</span>
+    </a>
+
+    <a href="vulnerabilities.html" class="nav-link">
+        <span class="icon">◈</span>
+        <span>Vulnerabilities</span>
+    </a>
+
+    <div class="section-title">
+        Management
+    </div>
+
+    <a href="reports.html" class="nav-link">
+        <span class="icon">▤</span>
+        <span>Reports</span>
+    </a>
+
+    <a href="compliance.html" class="nav-link">
+        <span class="icon">✓</span>
+        <span>Compliance</span>
+    </a>
+
+    <a href="settings.html" class="nav-link">
+        <span class="icon">⚙</span>
+        <span>Settings</span>
+    </a>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div class="page-title">
+            Incident Management
+        </div>
+
+        <div class="top-right">
+
+            <div class="demo-badge">
+                DEMO ENVIRONMENT
+            </div>
+
+            <div class="user">
+                SX
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <div class="intro">
+
+            <h1>Security Incidents</h1>
+
+            <p>
+                Monitor, investigate, and manage security incidents across the organization.
+            </p>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-top">
+                    <div class="card-title">
+                        Open Incidents
+                    </div>
+
+                    <div class="card-icon">
+                        🚨
+                    </div>
+                </div>
+
+                <div class="card-number">
+                    7
+                </div>
+
+                <div class="card-change danger">
+                    ▲ 2 from yesterday
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-top">
+                    <div class="card-title">
+                        Critical
+                    </div>
+
+                    <div class="card-icon">
+                        🔴
+                    </div>
+                </div>
+
+                <div class="card-number">
+                    1
+                </div>
+
+                <div class="card-change danger">
+                    Requires attention
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-top">
+                    <div class="card-title">
+                        Investigating
+                    </div>
+
+                    <div class="card-icon">
+                        🔎
+                    </div>
+                </div>
+
+                <div class="card-number">
+                    4
+                </div>
+
+                <div class="card-change warning">
+                    Active investigation
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-top">
+                    <div class="card-title">
+                        Resolved Today
+                    </div>
+
+                    <div class="card-icon">
+                        ✓
+                    </div>
+                </div>
+
+                <div class="card-number">
+                    18
+                </div>
+
+                <div class="card-change">
+                    ▲ 12% improvement
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTER TOOLBAR -->
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search"
+                placeholder="Search incidents, IDs, sources..."
+            >
+
+            <select id="severityFilter">
+
+                <option value="all">
+                    All Severities
+                </option>
+
+                <option value="critical">
+                    Critical
+                </option>
+
+                <option value="high">
+                    High
+                </option>
+
+                <option value="medium">
+                    Medium
+                </option>
+
+                <option value="low">
+                    Low
+                </option>
+
+            </select>
+
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="investigating">
+                    Investigating
+                </option>
+
+                <option value="monitoring">
+                    Monitoring
+                </option>
+
+                <option value="resolved">
+                    Resolved
+                </option>
+
+                <option value="contained">
+                    Contained
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- INCIDENT TABLE -->
+        <div class="table-container">
+
+            <div class="table-header">
+
+                <h2>Recent Security Incidents</h2>
+
+                <span id="resultCount">
+                    8 incidents
+                </span>
+
+            </div>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Incident</th>
+                        <th>Severity</th>
+                        <th>Source</th>
+                        <th>Detected</th>
+                        <th>Assigned To</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="incidentTable">
+
+
+                    <tr
+                        data-severity="critical"
+                        data-status="investigating"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20481
+                            </span>
+
+                            <span class="subtext">
+                                Unauthorized Access Attempt
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge critical">
+                                CRITICAL
+                            </span>
+                        </td>
+
+                        <td>
+                            Authentication
+                        </td>
+
+                        <td>
+                            8 min ago
+                        </td>
+
+                        <td>
+                            Security Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Investigating
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20481')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="high"
+                        data-status="monitoring"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20480
+                            </span>
+
+                            <span class="subtext">
+                                Suspicious Network Activity
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge high">
+                                HIGH
+                            </span>
+                        </td>
+
+                        <td>
+                            Network
+                        </td>
+
+                        <td>
+                            21 min ago
+                        </td>
+
+                        <td>
+                            SOC Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Monitoring
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20480')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="high"
+                        data-status="contained"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20479
+                            </span>
+
+                            <span class="subtext">
+                                Potential Malware Activity
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge high">
+                                HIGH
+                            </span>
+                        </td>
+
+                        <td>
+                            Endpoint
+                        </td>
+
+                        <td>
+                            34 min ago
+                        </td>
+
+                        <td>
+                            Endpoint Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Contained
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20479')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="medium"
+                        data-status="investigating"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20478
+                            </span>
+
+                            <span class="subtext">
+                                Multiple Failed Logins
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge medium">
+                                MEDIUM
+                            </span>
+                        </td>
+
+                        <td>
+                            Identity
+                        </td>
+
+                        <td>
+                            52 min ago
+                        </td>
+
+                        <td>
+                            IAM Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Investigating
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20478')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="medium"
+                        data-status="monitoring"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20477
+                            </span>
+
+                            <span class="subtext">
+                                Unusual Login Pattern
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge medium">
+                                MEDIUM
+                            </span>
+                        </td>
+
+                        <td>
+                            Authentication
+                        </td>
+
+                        <td>
+                            1 hour ago
+                        </td>
+
+                        <td>
+                            SOC Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Monitoring
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20477')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="low"
+                        data-status="resolved"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20476
+                            </span>
+
+                            <span class="subtext">
+                                Security Policy Warning
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge low">
+                                LOW
+                            </span>
+                        </td>
+
+                        <td>
+                            Endpoint
+                        </td>
+
+                        <td>
+                            2 hours ago
+                        </td>
+
+                        <td>
+                            IT Security
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Resolved
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20476')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="high"
+                        data-status="investigating"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20475
+                            </span>
+
+                            <span class="subtext">
+                                Privileged Account Alert
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge high">
+                                HIGH
+                            </span>
+                        </td>
+
+                        <td>
+                            Identity
+                        </td>
+
+                        <td>
+                            3 hours ago
+                        </td>
+
+                        <td>
+                            Security Team
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Investigating
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20475')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-severity="low"
+                        data-status="resolved"
+                    >
+
+                        <td>
+                            <span class="incident-id">
+                                INC-20474
+                            </span>
+
+                            <span class="subtext">
+                                Configuration Change
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge low">
+                                LOW
+                            </span>
+                        </td>
+
+                        <td>
+                            Configuration
+                        </td>
+
+                        <td>
+                            4 hours ago
+                        </td>
+
+                        <td>
+                            IT Operations
+                        </td>
+
+                        <td>
+                            <span class="badge status">
+                                Resolved
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="view-btn"
+                                onclick="viewIncident('INC-20474')"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- BOTTOM PANELS -->
+        <div class="bottom-grid">
+
+
+            <div class="panel">
+
+                <h3>Incident Activity</h3>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            INC-20481 escalated to Critical severity.
+                        </div>
+
+                        <div class="timeline-time">
+                            8 minutes ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            INC-20479 endpoint activity contained.
+                        </div>
+
+                        <div class="timeline-time">
+                            34 minutes ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            INC-20476 marked as resolved.
+                        </div>
+
+                        <div class="timeline-time">
+                            2 hours ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h3>Response Overview</h3>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            Average detection-to-response
+                        </div>
+
+                        <div class="timeline-time">
+                            4 minutes
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            Incidents resolved within SLA
+                        </div>
+
+                        <div class="timeline-time">
+                            96.4%
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div>
+
+                        <div class="timeline-text">
+                            Current response team
+                        </div>
+
+                        <div class="timeline-time">
+                            12 analysts online
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* Search + Filters */
+
+const searchInput = document.getElementById("searchInput");
+const severityFilter = document.getElementById("severityFilter");
+const statusFilter = document.getElementById("statusFilter");
+const rows = document.querySelectorAll("#incidentTable tr");
+const resultCount = document.getElementById("resultCount");
+
+function filterIncidents() {
+
+    const search =
+        searchInput.value.toLowerCase();
+
+    const severity =
+        severityFilter.value;
+
+    const status =
+        statusFilter.value;
+
+    let visible = 0;
+
+    rows.forEach(row => {
+
+        const text =
+            row.innerText.toLowerCase();
+
+        const rowSeverity =
+            row.dataset.severity;
+
+        const rowStatus =
+            row.dataset.status;
+
+        const matchesSearch =
+            text.includes(search);
+
+        const matchesSeverity =
+            severity === "all" ||
+            rowSeverity === severity;
+
+        const matchesStatus =
+            status === "all" ||
+            rowStatus === status;
+
+        if (
+            matchesSearch &&
+            matchesSeverity &&
+            matchesStatus
+        ) {
+
+            row.style.display = "";
+            visible++;
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+    resultCount.innerText =
+        visible + " incidents";
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    filterIncidents
+);
+
+severityFilter.addEventListener(
+    "change",
+    filterIncidents
+);
+
+statusFilter.addEventListener(
+    "change",
+    filterIncidents
+);
+
+
+/* View Incident */
+
+function viewIncident(id) {
+
+    showToast(
+        "Incident " +
+        id +
+        " selected — Demo details coming next."
+    );
+
+}
+
+
+/* Toast */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(() => {
+
+        toast.style.display = "none";
+
+    }, 3000);
+
+}
+
+</script>
+
+</body>
+</html>
