@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign In | ShieldX Cybersecurity Platform</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#07111f;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* BACKGROUND */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(59,130,246,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.08) 1px, transparent 1px);
+    background-size:45px 45px;
+    opacity:.5;
+}
+
+.glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(37,99,235,.16);
+    filter:blur(90px);
+    left:-180px;
+    top:-150px;
+}
+
+.glow2{
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(14,165,233,.10);
+    filter:blur(90px);
+    right:-150px;
+    bottom:-150px;
+}
+
+/* MAIN */
+
+.container{
+    width:100%;
+    max-width:1050px;
+    padding:25px;
+    position:relative;
+    z-index:2;
+}
+
+.login-wrapper{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    min-height:620px;
+    background:rgba(15,23,42,.88);
+    border:1px solid rgba(148,163,184,.16);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.45);
+    backdrop-filter:blur(18px);
+}
+
+/* LEFT */
+
+.left{
+    padding:55px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,64,175,.25),
+            rgba(15,23,42,.1)
+        );
+    border-right:1px solid rgba(148,163,184,.12);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.logo span{
+    color:#3b82f6;
+}
+
+.platform{
+    color:#94a3b8;
+    font-size:13px;
+    margin-bottom:45px;
+}
+
+.hero-title{
+    font-size:38px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.hero-title span{
+    color:#60a5fa;
+}
+
+.hero-text{
+    color:#94a3b8;
+    font-size:14px;
+    line-height:1.8;
+    max-width:450px;
+    margin-bottom:35px;
+}
+
+/* FEATURES */
+
+.feature{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:17px;
+}
+
+.feature-icon{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    background:rgba(37,99,235,.15);
+    border:1px solid rgba(59,130,246,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.feature-title{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.feature-text{
+    color:#64748b;
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* RIGHT */
+
+.right{
+    background:#ffffff;
+    color:#172033;
+    padding:55px;
+    display:flex;
+    align-items:center;
+}
+
+.form-container{
+    width:100%;
+    max-width:390px;
+    margin:auto;
+}
+
+.form-title{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.form-subtitle{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+/* DEMO BADGE */
+
+.demo{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:#fff7ed;
+    color:#c2410c;
+    border:1px solid #fed7aa;
+    border-radius:20px;
+    padding:7px 11px;
+    font-size:10px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#f97316;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:12px;
+    font-weight:bold;
+    color:#334155;
+    margin-bottom:8px;
+}
+
+.input-wrapper{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+    height:48px;
+    border:1px solid #dbe1ea;
+    border-radius:9px;
+    padding:0 42px;
+    font-size:13px;
+    outline:none;
+    color:#172033;
+    background:#fff;
+}
+
+input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.password-toggle{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:#64748b;
+    font-size:12px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:5px 0 22px;
+    font-size:12px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#64748b;
+}
+
+.remember input{
+    width:auto;
+    height:auto;
+    box-shadow:none;
+}
+
+.forgot{
+    color:#2563eb;
+    text-decoration:none;
+}
+
+.forgot:hover{
+    text-decoration:underline;
+}
+
+/* BUTTON */
+
+.login-btn{
+    width:100%;
+    height:49px;
+    border:none;
+    border-radius:9px;
+    background:#2563eb;
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-btn:hover{
+    background:#1d4ed8;
+    transform:translateY(-1px);
+}
+
+/* DIVIDER */
+
+.divider{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:25px 0;
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.divider:before,
+.divider:after{
+    content:"";
+    height:1px;
+    background:#e5e7eb;
+    flex:1;
+}
+
+/* DEMO ACCESS */
+
+.demo-access{
+    border:1px solid #dbeafe;
+    background:#eff6ff;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+.demo-title{
+    color:#1d4ed8;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.demo-text{
+    color:#64748b;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.demo-login{
+    margin-top:10px;
+    font-family:monospace;
+    font-size:11px;
+    color:#334155;
+}
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    padding:11px;
+    border-radius:8px;
+    font-size:11px;
+    margin-bottom:15px;
+}
+
+.error{
+    display:block;
+    background:#fef2f2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+}
+
+.success{
+    display:block;
+    background:#f0fdf4;
+    color:#15803d;
+    border:1px solid #bbf7d0;
+}
+
+/* FOOTER */
+
+.form-footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:10px;
+    line-height:1.6;
+}
+
+.security-note{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    margin-top:13px;
+    color:#64748b;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    body{
+        overflow:auto;
+        align-items:flex-start;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+    .login-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .left{
+        display:none;
+    }
+
+    .right{
+        min-height:650px;
+        padding:35px 25px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .container{
+        padding:0;
+    }
+
+    .login-wrapper{
+        border-radius:0;
+        min-height:100vh;
+    }
+
+    .right{
+        padding:30px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="background">
+
+    <div class="grid"></div>
+
+    <div class="glow"></div>
+
+    <div class="glow2"></div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="login-wrapper">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="left">
+
+            <div class="logo">
+                Shield<span>X</span>
+            </div>
+
+            <div class="platform">
+                CYBERSECURITY PLATFORM
+            </div>
+
+
+            <h1 class="hero-title">
+                Secure your
+                <span>digital enterprise.</span>
+            </h1>
+
+
+            <p class="hero-text">
+                ShieldX provides a centralized security operations
+                experience for monitoring threats, endpoints,
+                networks, vulnerabilities and compliance.
+            </p>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🛡️
+                </div>
+
+                <div>
+
+                    <div class="feature-title">
+                        Threat Detection
+                    </div>
+
+                    <div class="feature-text">
+                        Monitor suspicious security activity.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🖥️
+                </div>
+
+                <div>
+
+                    <div class="feature-title">
+                        Endpoint Protection
+                    </div>
+
+                    <div class="feature-text">
+                        Track endpoint security posture.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <div class="feature-title">
+                        Security Intelligence
+                    </div>
+
+                    <div class="feature-text">
+                        Centralized visibility across your environment.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <div class="feature-title">
+                        Compliance Monitoring
+                    </div>
+
+                    <div class="feature-text">
+                        Monitor security controls and readiness.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+
+        <section class="right">
+
+            <div class="form-container">
+
+                <div class="demo">
+
+                    <span class="dot"></span>
+
+                    DEMO ENVIRONMENT
+
+                </div>
+
+
+                <h2 class="form-title">
+                    Welcome back
+                </h2>
+
+
+                <p class="form-subtitle">
+                    Sign in to your ShieldX security console.
+                </p>
+
+
+                <div id="message" class="message"></div>
+
+
+                <form onsubmit="login(event)">
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="admin@company.com"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                                id="toggleBtn"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot"
+                            onclick="forgotPassword(event)"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                    >
+                        Sign In to ShieldX
+                    </button>
+
+
+                </form>
+
+
+                <div class="divider">
+                    DEMO ACCESS
+                </div>
+
+
+                <div class="demo-access">
+
+                    <div class="demo-title">
+                        Demo Credentials
+                    </div>
+
+                    <div class="demo-text">
+                        Use the sample credentials below to enter
+                        the ShieldX demonstration environment.
+                    </div>
+
+                    <div class="demo-login">
+                        Email: admin@shieldx.demo
+                        <br>
+                        Password: ShieldX2026
+                    </div>
+
+                </div>
+
+
+                <div class="form-footer">
+
+                    ShieldX Cybersecurity Platform
+                    <br>
+
+                    Demo environment • Sample data only
+
+                    <div class="security-note">
+                        🔐 Secure Demo Access
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* PASSWORD SHOW / HIDE */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.getElementById("toggleBtn");
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        button.textContent = "Hide";
+
+    }else{
+
+        password.type = "password";
+
+        button.textContent = "Show";
+
+    }
+
+}
+
+
+/* LOGIN */
+
+function login(event){
+
+    event.preventDefault();
+
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    /*
+        DEMO ONLY
+
+        This is NOT real authentication.
+        No server or database is used.
+    */
+
+    if(
+        email === "admin@shieldx.demo" &&
+        password === "ShieldX2026"
+    ){
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            "Login successful. Opening ShieldX Dashboard...";
+
+
+        setTimeout(function(){
+
+            window.location.href =
+                "index.html";
+
+        },800);
+
+
+    }else{
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Invalid demo credentials. Please use the credentials shown below.";
+
+    }
+
+}
+
+
+/* FORGOT PASSWORD */
+
+function forgotPassword(event){
+
+    event.preventDefault();
+
+    alert(
+        "Password recovery is disabled in this demo environment."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
